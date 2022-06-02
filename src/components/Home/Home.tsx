@@ -3,6 +3,7 @@ import { Box, Grid, Typography } from '@mui/material';
 import SquareIcon from '@mui/icons-material/Square';
 import { Main } from '../shared/CustomStyles/CustomStyles';
 import SourcesChart from './SourcesChart/SourcesChart';
+import ConditionsChart from './ConditionsChart/ConditionsChart';
 
 const Home: React.FC<any> = () => {
 
@@ -11,7 +12,7 @@ const Home: React.FC<any> = () => {
             <Grid container spacing={3}>
                 {/* Sources */}
                 <Grid item xs={12} md={5}>
-                    <Typography component="p" sx={{ mb: 4, fontWeight: "600", fontSize: "24px", color: '#575757' }}>
+                    <Typography component="p" className="fw-600" sx={{ mb: 4, fontSize: "24px", color: '#575757' }}>
                         Sources
                     </Typography>
                     <Grid container columnSpacing={3} sx={{ alignItems: 'center' }}>
@@ -39,14 +40,12 @@ const Home: React.FC<any> = () => {
 
                 {/* Conditions */}
                 <Grid item xs={12} md={7}>
-                    <Typography component="p" sx={{ mb: 4, fontWeight: "600", fontSize: "24px", color: '#575757' }}>
+                    <Typography component="p" className="fw-600" sx={{ mb: 4, fontSize: "24px", color: '#575757' }}>
                         Conditions
                     </Typography>
-                    <Grid container columnSpacing={3} sx={{ alignItems: 'center' }}>
-                        <Grid item xs={6}>
-                            <SourcesChart />
-                        </Grid>
-                    </Grid>
+                    <Box>
+                        <ConditionsChart />
+                    </Box>
                 </Grid>
             </Grid>
         </Main>
