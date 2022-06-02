@@ -13,5 +13,25 @@ body {
 }
 
 .fw-600 {
-    font-weight: 600;
+    font-weight: 600 !important;
+}
+
+.d-flex {
+    display: flex;
+}
+
+.justify-between {
+    justify-content: space-between;
+}
+
+.align-center {
+    align-items: center;
+}
+
+.fw-700 {
+    font-weight: 700 !important;
+}
+
+.text-gray {
+    color: #74777B !important;
 }
