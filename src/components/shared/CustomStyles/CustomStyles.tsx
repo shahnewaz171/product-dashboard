@@ -1,15 +1,11 @@
 import React from "react";
-import { Box, Container, SxProps } from "@mui/material";
+import { Box, Container } from "@mui/material";
 import { styled, alpha } from '@mui/material/styles';
 import InputBase from '@mui/material/InputBase';
 import Footer from "../Footer/Footer";
+import { ReactNode } from "../../../types/model";
 
-interface Props {
-    children: React.ReactNode,
-    sx?: SxProps
-}
-
-export const Main: React.FC<Props> = ({ children, sx }) => {
+export const Main: React.FC<ReactNode> = ({ children, sx }) => {
 
     return (
         <Box

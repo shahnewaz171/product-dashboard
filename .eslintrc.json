@@ -58,6 +58,11 @@
           "no-undef": 0,
           "react/react-in-jsx-scope": 0,
           "react/function-component-definition": [2, { "namedComponents": "arrow-function" }],
-          "import/no-cycle": 0
+          "import/no-cycle": 0,
+          "react/jsx-fragments": 0,
+          "react/no-unstable-nested-components": 0,
+          "react/jsx-no-constructed-context-values": 0,
+          "react/no-array-index-key": 0,
+          "no-nested-ternary": 0
     }
   }

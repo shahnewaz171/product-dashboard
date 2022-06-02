@@ -3,9 +3,9 @@ import { Outlet, useRoutes } from 'react-router-dom';
 import Home from '../components/Home/Home';
 import NotFound from '../components/shared/NotFound/NotFound';
 
-const GetRoutes = () => {
+const GetRoutes: React.FC<any> = () => {
 
-    let element = useRoutes([
+    const element = useRoutes([
         {
             path: "/",
             element: <Outlet />,

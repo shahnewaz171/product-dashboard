@@ -1,14 +1,11 @@
 import React, { createContext, useContext, useRef } from 'react';
 import { toast } from 'react-toastify';
 import { ErrorMessage } from '@hookform/error-message';
+import { ReactNode } from '../types/model';
 
 const UserContext = createContext<any>(null);
 
-interface Props{
-    children: React.ReactNode
-}
-
-export const UserProvider: React.FC<Props> = ({ children }) => {
+export const UserProvider: React.FC<ReactNode> = ({ children }) => {
     const toastId = useRef<any>(null);
 
     const alertMessage = (value: string, isSuccess: boolean) => {
