@@ -3,6 +3,7 @@ import { Box, Card, CardMedia, Chip, Grid, MenuItem, Select, Typography } from '
 import './AllProducts.css';
 
 const AllProducts: React.FC<any> = () => {
+    
     return (
         <Box className="products" sx={{ pt: 5 }}>
             <Box className="d-flex justify-between align-center" sx={{ mb: 5 }}>

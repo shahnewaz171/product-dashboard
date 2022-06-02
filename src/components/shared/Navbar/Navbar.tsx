@@ -5,9 +5,11 @@ import SearchIcon from '@mui/icons-material/Search';
 import MoreIcon from '@mui/icons-material/MoreVert';
 import { Search, SearchIconWrapper, StyledInputBase } from '../CustomStyles/CustomStyles';
 import './Navbar.css';
+import AddProduct from '../../Home/AllProducts/AddProduct/AddProduct';
 
 const Navbar: React.FC<any> = () => {
     const [mobileMoreAnchorEl, setMobileMoreAnchorEl] = useState<null | HTMLElement>(null);
+    const [open, setOpen] = useState<boolean>(false);
 
     const isMobileMenuOpen = Boolean(mobileMoreAnchorEl);
 
@@ -43,49 +45,54 @@ const Navbar: React.FC<any> = () => {
     );
 
     return (
-        <Box sx={{ flexGrow: 1 }}>
-            <AppBar className="navbar">
-                <Toolbar>
-                    <Typography
-                        variant="h6"
-                        noWrap
-                        component="div"
-                        sx={{ flexGrow: 1, fontSize: '24px', fontWeight: 700 }}
-                        className="text-uppercase"
-                    >
-                        Logo
-                    </Typography>
-                    <Box sx={{ display: { md: 'flex' } }}>
-                        <Search>
-                            <SearchIconWrapper>
-                                <SearchIcon />
-                            </SearchIconWrapper>
-                            <StyledInputBase
-                                placeholder="Search by Title or Brand"
-                                inputProps={{ 'aria-label': 'search' }}
-                                
-                            />
-                        </Search>
-                        <Button sx={{ display: { xs: 'none', md: 'block' } }} variant="contained" className='text-none addProduct-btn'>
-                            Add Product
-                        </Button>
-                    </Box>
-                    <Box sx={{ display: { xs: 'flex', md: 'none' } }}>
-                        <IconButton
-                            size="large"
-                            aria-label="show more"
-                            aria-controls={mobileMenuId}
-                            aria-haspopup="true"
-                            onClick={handleMobileMenuOpen}
-                            color="inherit"
+        <React.Fragment>
+            <Box sx={{ flexGrow: 1 }}>
+                <AppBar className="navbar">
+                    <Toolbar>
+                        <Typography
+                            variant="h6"
+                            noWrap
+                            component="div"
+                            sx={{ flexGrow: 1, fontSize: '24px', fontWeight: 700 }}
+                            className="text-uppercase"
                         >
-                            <MoreIcon />
-                        </IconButton>
-                    </Box>
-                </Toolbar>
-            </AppBar>
-            {renderMobileMenu}
-        </Box>
+                            Logo
+                        </Typography>
+                        <Box sx={{ display: { md: 'flex' } }}>
+                            <Search>
+                                <SearchIconWrapper>
+                                    <SearchIcon />
+                                </SearchIconWrapper>
+                                <StyledInputBase
+                                    placeholder="Search by Title or Brand"
+                                    inputProps={{ 'aria-label': 'search' }}
+
+                                />
+                            </Search>
+                            <Button onClick={() => setOpen(true)} sx={{ display: { xs: 'none', md: 'block' } }} variant="contained" className='text-none addProduct-btn'>
+                                Add Product
+                            </Button>
+                        </Box>
+                        <Box sx={{ display: { xs: 'flex', md: 'none' } }}>
+                            <IconButton
+                                size="large"
+                                aria-label="show more"
+                                aria-controls={mobileMenuId}
+                                aria-haspopup="true"
+                                onClick={handleMobileMenuOpen}
+                                color="inherit"
+                            >
+                                <MoreIcon />
+                            </IconButton>
+                        </Box>
+                    </Toolbar>
+                </AppBar>
+                {renderMobileMenu}
+            </Box>
+            {
+                <AddProduct open={open} setOpen={setOpen} />
+            }
+        </React.Fragment>
     );
 };
 

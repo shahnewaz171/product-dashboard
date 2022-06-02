@@ -80,3 +80,16 @@ export const StyledInputBase = styled(InputBase)(({ theme }) => ({
         color: '#fff'
     }
 }));
+
+// Add product styles
+export const modalStyle = {
+    position: 'absolute',
+    top: '50%',
+    left: '50%',
+    transform: 'translate(-50%, -50%)',
+    width: 900,
+    minHeight: "90vh",
+    bgcolor: 'background.paper',
+    borderRadius: '10px',
+    boxShadow: 24
+  };
