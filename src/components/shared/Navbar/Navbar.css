@@ -1,0 +1,14 @@
+.navbar {
+    background-color: #0095A0 !important;
+    box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.05) !important;
+}
+
+.navbar .MuiToolbar-root {
+    padding: 0px 80px;
+}
+
+.addProduct-btn {
+    color: #0095A0 !important;
+    background-color: #F7F5F2 !important;
+    box-shadow: none !important;
+}

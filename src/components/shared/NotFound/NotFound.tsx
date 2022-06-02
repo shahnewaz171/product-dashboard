@@ -1,7 +1,6 @@
 import React from 'react';
 import { Box, Typography } from '@mui/material';
 import { Main } from '../CustomStyles/CustomStyles';
-import localImages from '../localImages/localImages';
 import logoImg from '../../../images/404.png';
 
 const NotFound: React.FC = () => {
