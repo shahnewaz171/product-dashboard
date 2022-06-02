@@ -8,31 +8,33 @@ import { ReactNode } from "../../../types/model";
 export const Main: React.FC<ReactNode> = ({ children, sx }) => {
 
     return (
-        <Box
-            sx={{
-                display: "flex",
-                flexDirection: "column",
-                paddingTop: '100px',
-                paddingBottom: '20px',
-                paddingLeft: '80px',
-                paddingRight: "80px",
-                minHeight: '100vh',
-                position: 'relative',
-                ...sx
-            }}
-        >
-            <Container
-                component="main"
-                fixed
+        <React.Fragment>
+            <Box
                 sx={{
-                    flexGrow: 1,
-                    px: '0px !important'
+                    display: "flex",
+                    flexDirection: "column",
+                    paddingTop: '100px',
+                    paddingBottom: '20px',
+                    paddingLeft: '80px',
+                    paddingRight: "80px",
+                    minHeight: '100vh',
+                    position: 'relative',
+                    ...sx
                 }}
             >
-                {children}
-            </Container>
+                <Container
+                    component="main"
+                    fixed
+                    sx={{
+                        flexGrow: 1,
+                        px: '0px !important'
+                    }}
+                >
+                    {children}
+                </Container>
+            </Box>
             <Footer />
-        </Box>
+        </React.Fragment>
     )
 }
 
