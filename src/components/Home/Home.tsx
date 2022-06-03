@@ -5,9 +5,11 @@ import { Main } from '../shared/CustomStyles/CustomStyles';
 import SourcesChart from './SourcesChart/SourcesChart';
 import ConditionsChart from './ConditionsChart/ConditionsChart';
 import AllProducts from './AllProducts/AllProducts';
+import useGlobalContext from '../../context/useGlobalContext';
 import './Home.css';
 
 const Home: React.FC<any> = () => {
+    const { products, percentage } = useGlobalContext();
 
     return (
         <Main>
@@ -22,20 +24,35 @@ const Home: React.FC<any> = () => {
                             <SourcesChart />
                         </Grid>
                         <Grid item xs={6}>
-                            {['Daraz', 'Bikroy', 'Pickaboo'].map((item, i) => {
+                            {Object.keys(percentage)?.map((item, i) => {
+                                
                                 return (
                                     <Box key={i + 1} sx={{ display: "flex", gap: 1, alignItems: "center", mt: "5px" }}>
-                                        <SquareIcon sx={{ color: i === 0 ? "#84AF27" : i === 1 ? '#0095A0' : i === 2 ? '#FFC239' : '', height: "15px" }} />
-                                        <Typography sx={{ fontSize: "16px", color: "#74777B" }}>
-                                            {item}
+                                        <SquareIcon sx={{ color: i === 0 ? "#84AF27" : i === 1 ? '#0095A0' : i === 2 ? '#FFC239' : '', height: "16px" }} />
+                                        <Typography sx={{ fontSize: "15px", color: "#74777B", textTransform: 'capitalize' }}>
+                                            {item}:
                                         </Typography>
-                                        <Typography className="fw-600" sx={{ fontSize: "21px", color: "#74777B;" }}>
+                                        <Typography className="fw-600" sx={{ fontSize: "20px", color: "#74777B;" }}>
+                                            {percentage[item]}%
+                                        </Typography>
+                                    </Box>
+                                )
+                                
+                            })}
+                            {/* {['Daraz', 'Bikroy', 'Pickaboo'].map((item, i) => {
+                                return (
+                                    <Box key={i + 1} sx={{ display: "flex", gap: 1, alignItems: "center", mt: "5px" }}>
+                                        <SquareIcon sx={{ color: i === 0 ? "#84AF27" : i === 1 ? '#0095A0' : i === 2 ? '#FFC239' : '', height: "16px" }} />
+                                        <Typography sx={{ fontSize: "15px", color: "#74777B" }}>
+                                            {item}:
+                                        </Typography>
+                                        <Typography className="fw-600" sx={{ fontSize: "20px", color: "#74777B;" }}>
                                             35%
                                         </Typography>
                                     </Box>
                                 )
                             })
-                            }
+                            } */}
                         </Grid>
                     </Grid>
                 </Grid>
@@ -53,7 +70,7 @@ const Home: React.FC<any> = () => {
 
             {/* All Products */}
             <AllProducts />
-            
+
         </Main>
     );
 };

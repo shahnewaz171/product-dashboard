@@ -3,19 +3,44 @@ import { toast } from 'react-toastify';
 import { ErrorMessage } from '@hookform/error-message';
 import { ReactNode } from '../types/model';
 import { productList, productProps } from '../components/data/products';
-import axios from 'axios';
 
 const UserContext = createContext<any>(null);
 
 export const UserProvider: React.FC<ReactNode> = ({ children }) => {
     const [products, setProducts] = useState<productProps[]>([]);
+    const [percentage, setPercentage] = useState({});
     const [isLoading, setIsLoading] = useState<boolean>(true);
     const toastId = useRef<any>(null);
 
     const getProducts = () => {
-        if(productList.length){
+        const productLength = productList.length;
+        if(productLength){
             setIsLoading(false);
             setProducts(productList);
+            
+            let totalBikroy = 0;
+            let totalDaraz = 0;
+            let totalPickaboo = 0;
+
+            productList.forEach(item => {
+                if(item.phone_link?.includes('bikroy')){
+                    totalBikroy++;
+                }
+                else if(item.phone_link?.includes('daraz')){
+                    totalDaraz++;
+                }
+                else if(item.phone_link?.includes('pickaboo')){
+                    totalPickaboo++;
+                }
+            });
+
+            const sourcesLength = totalBikroy + totalDaraz + totalPickaboo;
+
+            setPercentage({
+                bikroy: Math.round((totalBikroy/sourcesLength) * (100)),
+                daraz: Math.round((totalDaraz/sourcesLength) * (100)),
+                pickaboo: Math.round((totalPickaboo/sourcesLength) * (100)),
+            });
         }
         else{
             setIsLoading(true);
@@ -53,6 +78,7 @@ export const UserProvider: React.FC<ReactNode> = ({ children }) => {
             />
         )
     }
+    // console.log(productList)
 
     return (
         <UserContext.Provider
@@ -61,7 +87,8 @@ export const UserProvider: React.FC<ReactNode> = ({ children }) => {
                 ErrorMessages,
                 products,
                 getProducts,
-                isLoading
+                isLoading,
+                percentage
             }}
         >
             {children}

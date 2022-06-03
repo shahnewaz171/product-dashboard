@@ -10,6 +10,7 @@ import {
     Legend,
 } from "chart.js";
 import { Pie } from "react-chartjs-2";
+import useGlobalContext from '../../../context/useGlobalContext';
 
 ChartJS.register(
     ArcElement,
@@ -22,21 +23,25 @@ ChartJS.register(
 );
 
 const SourcesChart: React.FC<any> = () => {
+    const { percentage } = useGlobalContext();
+
     const data = {
-        labels: ['Daraz', 'Bikroy', 'Pickaboo'],
+        labels: Object.keys(percentage),
         datasets: [
             {
                 label: '# of Votes',
-                data: [35, 30, 35],
+                data: Object.values(percentage),
                 backgroundColor: [
                     '#84AF27',
                     '#0095A0',
                     '#FFC239',
+                    '#000',
                 ],
                 borderColor: [
                     '#84AF27',
                     '#0095A0',
                     '#FFC239',
+                    '#000'
                 ],
                 borderWidth: 1,
             },
