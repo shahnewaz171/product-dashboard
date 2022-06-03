@@ -10,15 +10,6 @@
     border-radius: 4px;
 }
 
-.add-product .MuiOutlinedInput-root .MuiOutlinedInput-notchedOutline {
-    border-width: 0.5px !important;
-    border-color: #B7B8BC !important;
-}
-
-.add-product .MuiOutlinedInput-root.Mui-focused .MuiOutlinedInput-notchedOutline {
-    border-color: #0095A0 !important;
-}
-
 .add-product .searchItem-title {
     color: #74777B;
     font-weight: 400;

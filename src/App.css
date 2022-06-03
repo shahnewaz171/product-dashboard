@@ -11,9 +11,11 @@ body {
 .text-uppercase {
     text-transform: uppercase;
 }
+
 .fw-500 {
     font-weight: 500 !important;
 }
+
 .fw-600 {
     font-weight: 600 !important;
 }
@@ -36,4 +38,16 @@ body {
 
 .text-gray {
     color: #74777B !important;
+}
+
+
+/* product */
+
+.MuiOutlinedInput-root .MuiOutlinedInput-notchedOutline {
+    border-width: 0.5px !important;
+    border-color: #B7B8BC !important;
+}
+
+.MuiOutlinedInput-root.Mui-focused .MuiOutlinedInput-notchedOutline {
+    border-color: #0095A0 !important;
 }

@@ -29,6 +29,8 @@ const AddProduct: React.FC<any> = ({ open, setOpen }) => {
 
     const handleClose = () => {
         setOpen(false);
+        reset();
+        setSelectedTags([]);
     }
 
     const handleSelectedTags = (value: string[]) => {
