@@ -10,15 +10,15 @@ interface Props {
 
 const ProductList: React.FC<Props> = ({ item }: Props) => {
     const { brand, phone_title, phone_images,  ram, storage,  phone_price } = item;
-    console.log(item)
+    // console.log(item)
 
     return (
-        <Grid item container xs={12} sx={{ pb: 4 }}>
+        <Grid container className="product" sx={{ pb: 4 }}>
             <Grid item xs={5} className="product-card">
                 <Card sx={{ display: 'flex', boxShadow: 'none' }}>
                     <CardMedia
                         component="img"
-                        sx={{ width: 151 }}
+                        sx={{ width: '99px', height: '76px' }}
                         image={phone_images[0] || ''}
                         alt="product"
                     />

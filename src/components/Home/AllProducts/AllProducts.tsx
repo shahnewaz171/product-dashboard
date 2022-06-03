@@ -1,12 +1,21 @@
-import React from 'react';
+import React, {  useState } from 'react';
 import { Box, Grid, MenuItem, Select, Typography } from '@mui/material';
 import useGlobalContext from '../../../context/useGlobalContext';
-import './AllProducts.css';
+import InfiniteScroll from 'react-infinite-scroll-component';
 import ProductList from './ProductList/ProductList';
+import Loader from '../../shared/Loader/Loader';
+import './AllProducts.css';
 
 const AllProducts: React.FC<any> = () => {
     const { products } = useGlobalContext();
-    console.log(products);
+    const [visible, setVisible] = useState<number>(20);
+    const allProducts =  products?.slice(0, visible);
+
+    const fetchMoreData = () => {
+        setTimeout(() => {
+            setVisible(previousItems => previousItems + 20);
+        }, 1500);
+    };
 
     return (
         <Box className="products" sx={{ pt: 5 }}>
@@ -24,8 +33,9 @@ const AllProducts: React.FC<any> = () => {
                     </Select>
                 </Box>
             </Box>
-            <Grid container spacing={3} className="product">
-                {/* product title */}
+            
+            {/* product title */}
+            <Grid container spacing={3} className="product" sx={{ pb: 2 }}>
                 <Grid item container xs={12} className="product-card">
                     <Grid item xs={5} className="product-card">
                         <Typography component="p" className="product-title">Model</Typography>
@@ -40,12 +50,20 @@ const AllProducts: React.FC<any> = () => {
                         <Typography component="p" className="product-title">Price</Typography>
                     </Grid>
                 </Grid>
-
-                {/* product details */}
-                {
-                    products?.map((item: any) => <ProductList key={item._id} item={item} />)
-                }
             </Grid>
+
+            {/* product details */}
+            <InfiniteScroll
+                    dataLength={allProducts.length}
+                    next={fetchMoreData}
+                    style={{ overflow: 'hidden' }}
+                    hasMore={ allProducts.length === visible ? true : false }
+                    loader={<Loader /> }
+                >
+                    {
+                        allProducts?.map((item: any) => <ProductList key={item._id} item={item} />)
+                    }
+                </InfiniteScroll>
         </Box>
     );
 };
