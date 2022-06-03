@@ -1,12 +1,13 @@
 import React from 'react';
-import { Box, Card, CardMedia, Chip, Grid, MenuItem, Select, Typography } from '@mui/material';
+import { Box, Grid, MenuItem, Select, Typography } from '@mui/material';
 import useGlobalContext from '../../../context/useGlobalContext';
 import './AllProducts.css';
+import ProductList from './ProductList/ProductList';
 
-const AllProducts: React.FC = () => {
-    const { products, isLoading } = useGlobalContext();
+const AllProducts: React.FC<any> = () => {
+    const { products } = useGlobalContext();
     console.log(products);
-    
+
     return (
         <Box className="products" sx={{ pt: 5 }}>
             <Box className="d-flex justify-between align-center" sx={{ mb: 5 }}>
@@ -24,35 +25,26 @@ const AllProducts: React.FC = () => {
                 </Box>
             </Box>
             <Grid container spacing={3} className="product">
-                <Grid item xs={5} className="product-card">
-                    <Typography component="p" className="product-title">Model</Typography>
-                    <Card sx={{ display: 'flex', boxShadow: 'none' }}>
-                        <CardMedia
-                            component="img"
-                            sx={{ width: 151 }}
-                            image="https://res.cloudinary.com/towfiqu/image/upload/fl_progressive:steep/v1602744409/masterdeals_v_2.0/ayfimq6j3nzylqgpbfls.jpg"
-                            alt="product"
-                        />
-                        <Box sx={{ display: 'flex', flexDirection: 'column', pl: 2 }}>
-                            <Typography component="p" className="fw-600" sx={{ color: '#575757', fontSize: '18px', whiteSpace: 'nowrap' }}>Samsung Galaxy S22 </Typography>
-                            <Typography component="p" className="fw-500" sx={{ color: '#74777B', fontSize: '16px', whiteSpace: 'nowrap' }}>Samsung</Typography>
-                        </Box>
-                    </Card>
+                {/* product title */}
+                <Grid item container xs={12} className="product-card">
+                    <Grid item xs={5} className="product-card">
+                        <Typography component="p" className="product-title">Model</Typography>
+                    </Grid>
+                    <Grid item xs={2}>
+                        <Typography component="p" className="product-title">Ram/Rom</Typography>
+                    </Grid>
+                    <Grid item xs={3.5}>
+                        <Typography component="p" className="product-title">Tag</Typography>
+                    </Grid>
+                    <Grid item xs={1.5} sx={{ textAlign: 'end' }}>
+                        <Typography component="p" className="product-title">Price</Typography>
+                    </Grid>
                 </Grid>
-                <Grid item xs={2}>
-                    <Typography component="p" className="product-title">Ram/Rom</Typography>
-                    <Typography component="p" sx={{ color: '#74777B', fontSize: '16px', whiteSpace: 'nowrap', fontWeight: 500 }}>6/256</Typography>
-                </Grid>
-                <Grid item xs={3.5}>
-                    <Typography component="p" className="product-title">Tag</Typography>
-                    <Chip label="Best Value" className="tag-item" />
-                    <Chip label="Best Camera" className="tag-item" />
-                    <Chip label="Best Performance" className="tag-item" />
-                </Grid>
-                <Grid item xs={1.5} sx={{ textAlign: 'end' }}>
-                    <Typography component="p" className="product-title">Price</Typography>
-                    <Typography component="p" sx={{ color: '#74777B', fontSize: '16px', whiteSpace: 'nowrap', fontWeight: 500 }}>TK 120,000</Typography>
-                </Grid>
+
+                {/* product details */}
+                {
+                    products?.map((item: any) => <ProductList key={item._id} item={item} />)
+                }
             </Grid>
         </Box>
     );
