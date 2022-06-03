@@ -53,7 +53,7 @@ const Navbar: React.FC<any> = () => {
                             variant="h6"
                             noWrap
                             component="div"
-                            sx={{ flexGrow: 1, fontSize: '24px', fontWeight: 700 }}
+                            sx={{ flexGrow: 1, fontSize: '28px', fontWeight: 700 }}
                             className="text-uppercase"
                         >
                             Logo

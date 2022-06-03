@@ -16,7 +16,7 @@ const Home: React.FC<any> = () => {
             <Grid container spacing={3} sx={{ mb: 5 }}>
                 
                 {/* Sources */}
-                <Grid item xs={12} md={5}>
+                <Grid item xs={12} md={5.2}>
                     <Typography component="p" className="fw-600" sx={{ mb: 4, fontSize: "24px", color: '#575757' }}>
                         Sources
                     </Typography>
@@ -45,13 +45,11 @@ const Home: React.FC<any> = () => {
                 </Grid>
 
                 {/* Conditions */}
-                <Grid item xs={12} md={7}>
+                <Grid item xs={12} md={6.8}>
                     <Typography component="p" className="fw-600" sx={{ mb: 4, fontSize: "24px", color: '#575757' }}>
                         Conditions
                     </Typography>
-                    <Box>
-                        <ConditionsChart />
-                    </Box>
+                    <ConditionsChart />
                 </Grid>
             </Grid>
 

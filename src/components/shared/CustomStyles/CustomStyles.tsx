@@ -1,5 +1,5 @@
 import React from "react";
-import { Box, Container } from "@mui/material";
+import { Box, Container, createTheme } from "@mui/material";
 import { styled, alpha } from '@mui/material/styles';
 import InputBase from '@mui/material/InputBase';
 import Footer from "../Footer/Footer";
@@ -93,3 +93,14 @@ export const modalStyle = {
     borderRadius: '10px',
     boxShadow: 24
   };
+
+  export const theme = createTheme({
+    typography: {
+        fontFamily: "Poppins",
+    },
+    palette: {
+        primary: {
+            main: '#0095A0;',
+        }
+    },
+});

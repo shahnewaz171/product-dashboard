@@ -40,7 +40,7 @@ const ConditionsChart = () => {
             {
                 data: Object.values(phoneConditions),
                 backgroundColor: '#0095A0',
-                barThickness: 40,
+                barThickness: 30,
                 maxBarThickness: 100,
             }
         ],

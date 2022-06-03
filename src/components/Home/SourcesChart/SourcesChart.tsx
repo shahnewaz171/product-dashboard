@@ -32,8 +32,8 @@ const SourcesChart: React.FC<any> = () => {
     return (
         <Pie
             data={data}
-            width="100%"
-            height="228px"
+            width="248px"
+            height="248px"
             options={{
                 responsive: true,
                 maintainAspectRatio: false,
