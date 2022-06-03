@@ -1,12 +1,30 @@
-import React, { createContext, useContext, useRef } from 'react';
+import React, { createContext, useContext, useEffect, useRef, useState } from 'react';
 import { toast } from 'react-toastify';
 import { ErrorMessage } from '@hookform/error-message';
 import { ReactNode } from '../types/model';
+import { productList, productProps } from '../components/data/products';
+import axios from 'axios';
 
 const UserContext = createContext<any>(null);
 
 export const UserProvider: React.FC<ReactNode> = ({ children }) => {
+    const [products, setProducts] = useState<productProps[]>([]);
+    const [isLoading, setIsLoading] = useState<boolean>(true);
     const toastId = useRef<any>(null);
+
+    const getProducts = () => {
+        if(productList.length){
+            setIsLoading(false);
+            setProducts(productList);
+        }
+        else{
+            setIsLoading(true);
+        }
+    }
+
+    useEffect(() => {
+        getProducts();
+    }, []);
 
     const alertMessage = (value: string, isSuccess: boolean) => {
         toast.dismiss(toastId.current);
@@ -40,7 +58,10 @@ export const UserProvider: React.FC<ReactNode> = ({ children }) => {
         <UserContext.Provider
             value={{
                 alertMessage,
-                ErrorMessages
+                ErrorMessages,
+                products,
+                getProducts,
+                isLoading
             }}
         >
             {children}

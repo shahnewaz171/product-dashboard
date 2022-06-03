@@ -1,8 +1,12 @@
 import React from 'react';
 import { Box, Card, CardMedia, Chip, Grid, MenuItem, Select, Typography } from '@mui/material';
 import './AllProducts.css';
+import useGlobalContext from '../../../context/useGlobalContext';
 
 const AllProducts: React.FC<any> = () => {
+    const { products, isLoading } = useGlobalContext();
+    console.log(isLoading)
+    console.log(products);
     
     return (
         <Box className="products" sx={{ pt: 5 }}>
