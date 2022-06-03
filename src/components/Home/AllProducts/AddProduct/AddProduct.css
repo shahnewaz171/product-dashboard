@@ -2,14 +2,20 @@
     padding: 10px 125px 10px 15px;
 }
 
+.add-product .MuiAutocomplete-root .MuiOutlinedInput-root {
+    padding: 3px 45px 3px 15px;
+}
+
 .add-product .MuiOutlinedInput-root {
     border-radius: 4px;
 }
-.add-product .MuiOutlinedInput-root .MuiOutlinedInput-notchedOutline{
+
+.add-product .MuiOutlinedInput-root .MuiOutlinedInput-notchedOutline {
     border-width: 0.5px !important;
     border-color: #B7B8BC !important;
 }
-.add-product .MuiOutlinedInput-root.Mui-focused .MuiOutlinedInput-notchedOutline{
+
+.add-product .MuiOutlinedInput-root.Mui-focused .MuiOutlinedInput-notchedOutline {
     border-color: #0095A0 !important;
 }
 
@@ -65,15 +71,18 @@
     border-radius: 15px;
     border: 2px solid #0095A0;
 }
+
 .disable-loader {
     height: 15px !important;
     width: 15px !important;
     margin-right: 5px;
 }
+
 .add-product .MuiFormHelperText-root {
     margin-left: 0px;
 }
-.add-product .addPd-btn{
+
+.add-product .addPd-btn {
     padding: 9.5px 30px;
     box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.05);
 }

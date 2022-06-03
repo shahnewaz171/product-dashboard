@@ -31,7 +31,7 @@ export const UserProvider: React.FC<ReactNode> = ({ children }) => {
             <ErrorMessage
                 errors={errors}
                 name={`${inputName}`}
-                render={({ message }) => <p style={{ margin: 0, fontSize: "14px", color: "#d32f2f" }}>{message}</p>}
+                render={({ message }) => <p style={{ margin: 0, fontSize: "11px", color: "rgb(211, 47, 47)" }}>{message}</p>}
             />
         )
     }
