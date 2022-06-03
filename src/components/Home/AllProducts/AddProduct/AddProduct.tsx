@@ -15,10 +15,10 @@ const productInfo = [
     { id: 4, title: "Tags", name: "tags", placeText: "Search and Select" },
     { id: 5, title: "Price", name: "price", placeText: "Enter your product price" }
 ]
-const tagLabel = ['Best value', 'Best camera', 'Best performance']
+const tagLabel = ['Best value', 'Best camera', 'Best performance'];
 
 
-const AddProduct: React.FC<any> = ({ open, setOpen }) => {
+const AddProduct: React.FC< any> = ({ open, setOpen }) => {
     const { ErrorMessages } = useGlobalContext();
     const [disable, setDisable] = useState(false);
     const [selectedTags, setSelectedTags] = useState<string[]>([]);

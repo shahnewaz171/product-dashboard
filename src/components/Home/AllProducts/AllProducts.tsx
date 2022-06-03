@@ -3,9 +3,9 @@ import { Box, Card, CardMedia, Chip, Grid, MenuItem, Select, Typography } from '
 import useGlobalContext from '../../../context/useGlobalContext';
 import './AllProducts.css';
 
-const AllProducts: React.FC<any> = () => {
+const AllProducts: React.FC = () => {
     const { products, isLoading } = useGlobalContext();
-    // console.log(products);
+    console.log(products);
     
     return (
         <Box className="products" sx={{ pt: 5 }}>
@@ -15,10 +15,11 @@ const AllProducts: React.FC<any> = () => {
                 </Typography>
                 <Box className="d-flex justify-between align-center">
                     <Typography component="span" sx={{ color: '#74777B', fontSize: '16px', whiteSpace: 'nowrap' }}>Sort by:</Typography>
-                    <Select defaultValue="a" className="text-gray filter-input" sx={{ ml: 1 }} >
-                        <MenuItem value="a">All Products</MenuItem>
-                        <MenuItem value="Best_value">Best value</MenuItem>
-                        <MenuItem value="Best_Performance">Best Performance</MenuItem>
+                    <Select defaultValue="" className="text-gray filter-input" sx={{ ml: 1 }} >
+                        <MenuItem value="">All Products</MenuItem>
+                        <MenuItem value="best_value">Best value</MenuItem>
+                        <MenuItem value="Best camera">Best camera</MenuItem>
+                        <MenuItem value="best_performance">Best Performance</MenuItem>
                     </Select>
                 </Box>
             </Box>
@@ -42,13 +43,13 @@ const AllProducts: React.FC<any> = () => {
                     <Typography component="p" className="product-title">Ram/Rom</Typography>
                     <Typography component="p" sx={{ color: '#74777B', fontSize: '16px', whiteSpace: 'nowrap', fontWeight: 500 }}>6/256</Typography>
                 </Grid>
-                <Grid item xs={3}>
+                <Grid item xs={3.5}>
                     <Typography component="p" className="product-title">Tag</Typography>
                     <Chip label="Best Value" className="tag-item" />
                     <Chip label="Best Camera" className="tag-item" />
                     <Chip label="Best Performance" className="tag-item" />
                 </Grid>
-                <Grid item xs={2} sx={{ textAlign: 'end' }}>
+                <Grid item xs={1.5} sx={{ textAlign: 'end' }}>
                     <Typography component="p" className="product-title">Price</Typography>
                     <Typography component="p" sx={{ color: '#74777B', fontSize: '16px', whiteSpace: 'nowrap', fontWeight: 500 }}>TK 120,000</Typography>
                 </Grid>

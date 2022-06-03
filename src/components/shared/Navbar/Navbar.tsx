@@ -7,7 +7,7 @@ import { Search, SearchIconWrapper, StyledInputBase } from '../CustomStyles/Cust
 import './Navbar.css';
 import AddProduct from '../../Home/AllProducts/AddProduct/AddProduct';
 
-const Navbar: React.FC<any> = () => {
+const Navbar: React.FC = () => {
     const [mobileMoreAnchorEl, setMobileMoreAnchorEl] = useState<null | HTMLElement>(null);
     const [open, setOpen] = useState<boolean>(false);
 

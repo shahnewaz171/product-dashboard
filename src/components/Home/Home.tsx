@@ -8,7 +8,7 @@ import AllProducts from './AllProducts/AllProducts';
 import useGlobalContext from '../../context/useGlobalContext';
 import './Home.css';
 
-const Home: React.FC<any> = () => {
+const Home: React.FC = () => {
     const { products, percentage } = useGlobalContext();
 
     return (

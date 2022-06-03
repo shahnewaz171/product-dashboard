@@ -28,10 +28,9 @@ const options = {
 const ConditionsChart = () => {
     const { phoneConditions } = useGlobalContext();
     const keys = Object.keys(phoneConditions)?.map(item => {
-        const title = item.split('_').join('');
+        const title = item.split('_').join(' ');
         return (title.substring(0, 1).toUpperCase()) + (title.substring(1))
     });
-    console.log(phoneConditions)
 
     const labels = keys;
     const data = {
