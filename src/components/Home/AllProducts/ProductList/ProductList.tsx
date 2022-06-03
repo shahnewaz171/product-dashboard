@@ -13,7 +13,7 @@ const ProductList: React.FC<Props> = ({ item }: Props) => {
     // console.log(item)
 
     return (
-        <Grid container className="product" sx={{ pb: 4 }}>
+        <Grid container className="product" sx={{ pt: 3, pb: 4.5 }}>
             <Grid item xs={5} className="product-card">
                 <Card sx={{ display: 'flex', boxShadow: 'none' }}>
                     <CardMedia
