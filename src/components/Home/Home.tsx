@@ -39,20 +39,6 @@ const Home: React.FC<any> = () => {
                                 )
                                 
                             })}
-                            {/* {['Daraz', 'Bikroy', 'Pickaboo'].map((item, i) => {
-                                return (
-                                    <Box key={i + 1} sx={{ display: "flex", gap: 1, alignItems: "center", mt: "5px" }}>
-                                        <SquareIcon sx={{ color: i === 0 ? "#84AF27" : i === 1 ? '#0095A0' : i === 2 ? '#FFC239' : '', height: "16px" }} />
-                                        <Typography sx={{ fontSize: "15px", color: "#74777B" }}>
-                                            {item}:
-                                        </Typography>
-                                        <Typography className="fw-600" sx={{ fontSize: "20px", color: "#74777B;" }}>
-                                            35%
-                                        </Typography>
-                                    </Box>
-                                )
-                            })
-                            } */}
                         </Grid>
                     </Grid>
                 </Grid>
