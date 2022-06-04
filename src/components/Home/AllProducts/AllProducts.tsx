@@ -3,13 +3,13 @@ import { Box, Grid, MenuItem, Select, Typography } from '@mui/material';
 import useGlobalContext from '../../../context/useGlobalContext';
 import InfiniteScroll from 'react-infinite-scroll-component';
 import ProductList from './ProductList/ProductList';
-import Loader from '../../shared/Loader/Loader';
+import Loader from '../../shared/Loader/RotatingLoader';
 import { useSearchParams } from 'react-router-dom';
 import './AllProducts.css';
 
-const AllProducts: React.FC<any> = () => {
+const AllProducts: React.FC = () => {
     const { products, searchValue } = useGlobalContext();
-    const [visible, setVisible] = useState<number>(130);
+    const [visible, setVisible] = useState<number>(20);
     const [searchParams, setSearchParams] = useSearchParams();
     const allProducts = products?.slice(0, visible);
     let productsInfo = [];
@@ -53,7 +53,7 @@ const AllProducts: React.FC<any> = () => {
     const fetchMoreData = () => {
         setTimeout(() => {
             setVisible(previousItems => previousItems + 20);
-        }, 1500);
+        }, 500);
     };
 
     return (
@@ -112,11 +112,7 @@ const AllProducts: React.FC<any> = () => {
                 loader={<Loader />}
             >
                 {productsInfo.length ?
-                    <>
-                        {console.log(productsInfo)}
-                        {
-                            productsInfo?.map((item: any) => <ProductList key={item._id} item={item} />)
-                        }</>
+                    productsInfo?.map((item: any) => <ProductList key={item._id} item={item} />)
                     :
                     allProducts.length !== visible &&
                     <Typography component="h5" className="text-center not-found" sx={{ mt: 4 }}>

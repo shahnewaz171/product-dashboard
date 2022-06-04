@@ -7,6 +7,7 @@ import NotFound from './components/shared/NotFound/NotFound';
 import { ThemeProvider } from '@mui/material';
 import { theme } from './components/shared/CustomStyles/CustomStyles';
 import { RouteTypes } from './types/model';
+import RotatingLoader from './components/shared/Loader/RotatingLoader';
 import './App.css';
 
 const Home = React.lazy(() => import('./components/Home/Home'));
@@ -29,7 +30,7 @@ const App: React.FC = () => {
 
   return (
     
-      <React.Suspense fallback={<p>Loading ...</p>}>
+      <React.Suspense fallback={<RotatingLoader />}>
         <ThemeProvider theme={theme}>
           <UserProvider>
             <Navbar />
