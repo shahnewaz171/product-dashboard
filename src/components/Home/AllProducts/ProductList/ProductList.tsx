@@ -10,10 +10,7 @@ interface Props {
 
 const ProductList: React.FC<Props> = ({ item }: Props) => {
     const { brand, phone_title, phone_images,  ram, storage,  phone_price, tags } = item;
-    // const tags = item.tags.length > 0 && item.tags;
-    if(item.tags.length){
-        console.log(item.tags)
-    }
+    console.log(item);
 
     return (
         <Grid container className="product" sx={{ pt: 3, pb: 4.5 }}>
@@ -35,9 +32,11 @@ const ProductList: React.FC<Props> = ({ item }: Props) => {
                 <Typography component="p" sx={{ color: '#74777B', fontSize: '16px', whiteSpace: 'nowrap', fontWeight: 500 }}>{`${ram || 0}/${storage || 0}`}</Typography>
             </Grid>
             <Grid item xs={3.5}>
-                <Chip label="Best Value" className="tag-item" />
-                <Chip label="Best Camera" className="tag-item" />
-                <Chip label="Best Performance" className="tag-item" />
+                {tags?.map((tag: string, i: number) => {
+                    return (
+                        <Chip key={i + 1} label={tag?.split('_').join(' ')} className={"tag-item "+ (tag.includes('best_value') ? 'bestValue' : tag.includes('best_camera') ? 'bestCamera' : tag.includes('best_performance') ? 'bestPerformance' : '')}/>
+                    )
+                })}
             </Grid>
             <Grid item xs={1.5} sx={{ textAlign: 'end' }}>
                 <Typography component="p" sx={{ color: '#74777B', fontSize: '16px', whiteSpace: 'nowrap', fontWeight: 500 }}>TK {phone_price?.toString().replace(/\B(?<!\.\d*)(?=(\d{3})+(?!\d))/g, ",")}</Typography>

@@ -1,17 +1,34 @@
-.product .product-title{
+.product .product-title {
     color: #74777B;
     font-size: 16px;
     white-space: nowrap;
     margin-bottom: 30px;
 }
-.product .tag-item{
-    background-color: rgba(221, 158, 16, 0.1);
-    border: 0.5px solid #DD9E10;
-    color: #DD9E10;
+
+.product .tag-item {
     font-size: 12px;
     font-weight: 500;
-    border-radius: 2px;
+    border-radius: 4px;
     padding: 4px 18px;
     margin-bottom: 6.4px;
     margin-right: 6.4px;
+    text-transform: capitalize;
+}
+
+.product .bestValue {
+    background-color: rgba(221, 158, 16, 0.1);
+    border: 0.5px solid #DD9E10;
+    color: #DD9E10;
+}
+
+.product .bestCamera {
+    background-color: rgba(135, 76, 114, 0.1);
+    border: 0.5px solid #874C72;
+    color: #874C72;
+}
+
+.product .bestPerformance {
+    background-color: rgba(17, 160, 219, 0.1);
+    border: 0.5px solid #11A0DB;
+    color: #11A0DB;
 }
