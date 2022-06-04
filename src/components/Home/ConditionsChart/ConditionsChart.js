@@ -27,7 +27,7 @@ const options = {
 
 const ConditionsChart = () => {
     const { phoneConditions } = useGlobalContext();
-    const keys = Object.keys(phoneConditions)?.map(item => {
+    const keys = phoneConditions && Object.keys(phoneConditions)?.map(item => {
         const title = item.split('_').join(' ');
         return (title.substring(0, 1).toUpperCase()) + (title.substring(1))
     });
@@ -37,7 +37,7 @@ const ConditionsChart = () => {
         labels,
         datasets: [
             {
-                data: Object.values(phoneConditions),
+                data: phoneConditions && Object.values(phoneConditions),
                 backgroundColor: '#0095A0',
                 barThickness: 30,
                 maxBarThickness: 100,

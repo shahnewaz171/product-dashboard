@@ -20,7 +20,7 @@ const tagLabel = ['Best value', 'Best camera', 'Best performance'];
 
 const AddProduct: React.FC< any> = ({ open, setOpen }) => {
     const { ErrorMessages } = useGlobalContext();
-    const [disable, setDisable] = useState(false);
+    const [disable, setDisable] = useState<boolean>(false);
     const [selectedTags, setSelectedTags] = useState<string[]>([]);
     const { register, handleSubmit, reset, formState: { errors }, control } = useForm({
         mode: "all",

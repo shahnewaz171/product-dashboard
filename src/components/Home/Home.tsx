@@ -26,7 +26,7 @@ const Home: React.FC<any> = () => {
                             <SourcesChart />
                         </Grid>
                         <Grid item xs={6}>
-                            {Object.keys(percentage)?.map((item, i) => {
+                            {percentage && Object.keys(percentage)?.map((item, i) => {
                                 
                                 return (
                                     <Box key={i + 1} sx={{ display: "flex", gap: 1, alignItems: "center", mt: "5px" }}>

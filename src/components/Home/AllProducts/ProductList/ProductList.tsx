@@ -10,7 +10,7 @@ interface Props {
 
 const ProductList: React.FC<Props> = ({ item }: Props) => {
     const { brand, phone_title, phone_images,  ram, storage,  phone_price } = item;
-    // console.log(item)
+    console.log(item)
 
     return (
         <Grid container className="product" sx={{ pt: 3, pb: 4.5 }}>

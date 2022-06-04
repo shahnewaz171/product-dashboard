@@ -10,10 +10,10 @@ const SourcesChart: React.FC<any> = () => {
     const { percentage } = useGlobalContext();
 
     const data = {
-        labels: Object.keys(percentage),
+        labels: percentage && Object.keys(percentage),
         datasets: [
             {
-                data: Object.values(percentage),
+                data: percentage && Object.values(percentage),
                 backgroundColor: [
                     '#84AF27',
                     '#0095A0',
