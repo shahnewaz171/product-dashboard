@@ -6,6 +6,7 @@ import Navbar from './components/shared/Navbar/Navbar';
 import NotFound from './components/shared/NotFound/NotFound';
 import { ThemeProvider } from '@mui/material';
 import { theme } from './components/shared/CustomStyles/CustomStyles';
+import { RouteTypes } from './types/model';
 import './App.css';
 
 const Home = React.lazy(() => import('./components/Home/Home'));
@@ -13,7 +14,7 @@ const Home = React.lazy(() => import('./components/Home/Home'));
 
 const App: React.FC = () => {
 
-  const element = [
+  const element: RouteTypes[] = [
     {
       path: "/",
       element: <Outlet />,

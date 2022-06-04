@@ -25,7 +25,7 @@ const options = {
 };
 
 
-const ConditionsChart = () => {
+const ConditionsChart: React.FC = () => {
     const { phoneConditions } = useGlobalContext();
     const keys = phoneConditions && Object.keys(phoneConditions)?.map(item => {
         const title = item.split('_').join(' ');

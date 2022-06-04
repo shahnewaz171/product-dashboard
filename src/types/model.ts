@@ -1,4 +1,5 @@
 import { SxProps } from "@mui/material";
+import React from "react";
 
 export interface ReactNode {
     children: React.ReactNode;
@@ -14,4 +15,11 @@ export interface ConditionsProps{
     unofficial: number;
     without_warranty: number;
     used: number;
+}
+
+export interface RouteTypes{
+    path?: string;
+    element: React.ReactNode;
+    index?: boolean;
+    children?: RouteTypes[];
 }

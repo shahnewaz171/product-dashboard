@@ -6,7 +6,7 @@ import useGlobalContext from '../../../context/useGlobalContext';
 ChartJS.register( ArcElement, Tooltip, Legend, CategoryScale, LinearScale, BarElement, Title);
 
 
-const SourcesChart: React.FC<any> = () => {
+const SourcesChart: React.FC = () => {
     const { percentage } = useGlobalContext();
 
     const data = {
