@@ -1,8 +1,8 @@
 import React, { createContext, useContext, useEffect, useRef, useState } from 'react';
 import { toast } from 'react-toastify';
 import { ErrorMessage } from '@hookform/error-message';
-import { ConditionsProps, ReactNode, SourcesProps } from '../types/model';
-import { productList, productProps } from '../components/data/products';
+import { ConditionsProps, productProps, ReactNode, SourcesProps } from '../types/model';
+import { productList } from '../components/data/products';
 
 const UserContext = createContext<any>(null);
 
@@ -25,33 +25,33 @@ export const UserProvider: React.FC<ReactNode> = ({ children }) => {
 
         if (productLength) {
             setIsLoading(false);
-            setProducts(productList);
 
-            /* for showing the percentage of 3 sources */
-            productList.forEach(item => {
-                if (item.phone_link?.includes('bikroy')) {
-                    totalBikroy++;
+            const data = productList.map((item, index) => {
+                const { phone_price, official_warranty, unofficial_warranty, no_warranty, used_phone, phone_link, ram, storage, brand, phone_details } = item;
+
+                item.tags = [];
+
+                const mainSensor = parseInt(phone_details.mainCamera?.split(',')[0]);
+                const cameras = phone_details.mainCamera?.split(/[ ,]+/)?.filter(item => (item === 'MP'));
+                const selfieCamera = parseInt(phone_details.selfieCamera?.split(',')[0]);
+                const snapdragonChip = phone_details['chipset'].toLowerCase()?.includes('snapdragon');
+                const amoledDisplay = phone_details['displayType'].toLowerCase()?.includes('amoled');
+                const specificPixels = phone_details['displayRes'].toLowerCase()?.includes('1080');
+
+                /* best value */
+                if((phone_price <= 20000) && ((Number(ram)) >= 4) && ((Number(storage)) >= 64) && ((brand.toLowerCase().includes('xiaomi')) || (brand.toLowerCase().includes('realme')))){
+                    item.tags?.push('best_value');
                 }
-                else if (item.phone_link?.includes('daraz')) {
-                    totalDaraz++;
+                /* best camera */
+                if((mainSensor >= 16 ) && (cameras.length >= 3) && (selfieCamera >= 13) && ((Number(storage) >= 64)) && phone_details.external?.includes('microSD')){
+                    item.tags?.push('best_camera');
                 }
-                else if (item.phone_link?.includes('pickaboo')) {
-                    totalPickaboo++;
+                /* best performance */
+                if((snapdragonChip) && (phone_price > 20000) && ((Number(ram)) > 4) && ((Number(storage)) >= 128) && (amoledDisplay) && (specificPixels)){
+                    item.tags?.push('best_performance');
                 }
-            });
 
-            const sourcesLength = totalBikroy + totalDaraz + totalPickaboo;
-
-            setPercentage({
-                bikroy: Math.round((totalBikroy / sourcesLength) * (100)),
-                daraz: Math.round((totalDaraz / sourcesLength) * (100)),
-                pickaboo: Math.round((totalPickaboo / sourcesLength) * (100)),
-            });
-
-            /* for showing phone conditions */
-            for (let item of productList) {
-                const { phone_price, official_warranty, unofficial_warranty, no_warranty, used_phone } = item;
-
+                /* for showing the percentage of 3 sources */
                 if (official_warranty) {
                     officialWarranty += phone_price;
                 }
@@ -64,7 +64,30 @@ export const UserProvider: React.FC<ReactNode> = ({ children }) => {
                 if (used_phone) {
                     usedPhone += phone_price;
                 }
-            }
+
+                /* for showing phone conditions */
+                if (phone_link?.includes('bikroy')) {
+                    totalBikroy++;
+                }
+                else if (phone_link?.includes('daraz')) {
+                    totalDaraz++;
+                }
+                else if (phone_link?.includes('pickaboo')) {
+                    totalPickaboo++;
+                } 
+
+                return item;
+
+            });
+            setProducts(data);
+
+            const sourcesLength = totalBikroy + totalDaraz + totalPickaboo;
+
+            setPercentage({
+                bikroy: Math.round((totalBikroy / sourcesLength) * (100)),
+                daraz: Math.round((totalDaraz / sourcesLength) * (100)),
+                pickaboo: Math.round((totalPickaboo / sourcesLength) * (100)),
+            });
 
             setPhoneConditions({
                 official: officialWarranty,

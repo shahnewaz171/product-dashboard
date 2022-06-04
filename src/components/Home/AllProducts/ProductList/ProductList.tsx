@@ -1,6 +1,6 @@
 import React from 'react';
 import { Box, Card, CardMedia, Chip, Grid, Typography } from '@mui/material';
-import { productProps } from '../../../data/products';
+import { productProps } from '../../../../types/model';
 
 interface Props {
     products?: productProps[];
@@ -9,8 +9,11 @@ interface Props {
 }
 
 const ProductList: React.FC<Props> = ({ item }: Props) => {
-    const { brand, phone_title, phone_images,  ram, storage,  phone_price } = item;
-    console.log(item)
+    const { brand, phone_title, phone_images,  ram, storage,  phone_price, tags } = item;
+    // const tags = item.tags.length > 0 && item.tags;
+    if(item.tags.length){
+        console.log(item.tags)
+    }
 
     return (
         <Grid container className="product" sx={{ pt: 3, pb: 4.5 }}>
