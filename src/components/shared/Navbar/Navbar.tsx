@@ -4,10 +4,12 @@ import { AppBar, Box, Toolbar, Typography, Button, Menu, IconButton, MenuItem } 
 import SearchIcon from '@mui/icons-material/Search';
 import MoreIcon from '@mui/icons-material/MoreVert';
 import { Search, SearchIconWrapper, StyledInputBase } from '../CustomStyles/CustomStyles';
-import './Navbar.css';
+import useGlobalContext from '../../../context/useGlobalContext';
 import AddProduct from '../../Home/AllProducts/AddProduct/AddProduct';
+import './Navbar.css';
 
 const Navbar: React.FC = () => {
+    const { setSearchValue } = useGlobalContext();
     const [mobileMoreAnchorEl, setMobileMoreAnchorEl] = useState<null | HTMLElement>(null);
     const [open, setOpen] = useState<boolean>(false);
 
@@ -66,7 +68,8 @@ const Navbar: React.FC = () => {
                                 <StyledInputBase
                                     placeholder="Search by Title or Brand"
                                     inputProps={{ 'aria-label': 'search' }}
-
+                                    defaultValue=""
+                                    onChange={(e) => setSearchValue(e.target.value)}
                                 />
                             </Search>
                             <Button onClick={() => setOpen(true)} sx={{ display: { xs: 'none', md: 'block' } }} variant="contained" className='text-none addProduct-btn'>

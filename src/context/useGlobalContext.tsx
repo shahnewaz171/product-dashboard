@@ -11,6 +11,7 @@ export const UserProvider: React.FC<ReactNode> = ({ children }) => {
     const [percentage, setPercentage] = useState<SourcesProps | null>(null);
     const [phoneConditions, setPhoneConditions] = useState<ConditionsProps | null>(null);
     const [isLoading, setIsLoading] = useState<boolean>(true);
+    const [searchValue, setSearchValue] = useState("");
     const toastId = useRef<any>(null);
 
     const getProducts = () => {
@@ -142,7 +143,9 @@ export const UserProvider: React.FC<ReactNode> = ({ children }) => {
                 getProducts,
                 isLoading,
                 percentage,
-                phoneConditions
+                phoneConditions,
+                setSearchValue,
+                searchValue
             }}
         >
             {children}

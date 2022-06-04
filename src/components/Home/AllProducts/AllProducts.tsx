@@ -1,21 +1,25 @@
-import React, {  useState } from 'react';
+import React, { useState } from 'react';
 import { Box, Grid, MenuItem, Select, Typography } from '@mui/material';
 import useGlobalContext from '../../../context/useGlobalContext';
 import InfiniteScroll from 'react-infinite-scroll-component';
 import ProductList from './ProductList/ProductList';
 import Loader from '../../shared/Loader/Loader';
+import { useSearchParams } from 'react-router-dom';
 import './AllProducts.css';
 
 const AllProducts: React.FC<any> = () => {
-    const { products } = useGlobalContext();
-    const [visible, setVisible] = useState<number>(20);
-    const allProducts =  products?.slice(0, visible);
+    const { products, searchValue } = useGlobalContext();
+    const [visible, setVisible] = useState<number>(60);
+    let [searchParams, setSearchParams] = useSearchParams();
+    const allProducts = products?.slice(0, visible);
 
     const fetchMoreData = () => {
         setTimeout(() => {
             setVisible(previousItems => previousItems + 20);
         }, 1500);
     };
+
+    console.log(searchValue)
 
     return (
         <Box className="products" sx={{ pt: 5 }}>
@@ -25,15 +29,27 @@ const AllProducts: React.FC<any> = () => {
                 </Typography>
                 <Box className="d-flex justify-between align-center">
                     <Typography component="span" sx={{ color: '#74777B', fontSize: '16px', whiteSpace: 'nowrap' }}>Sort by:</Typography>
-                    <Select defaultValue="" className="text-gray filter-input" sx={{ ml: 1 }} >
-                        <MenuItem value="">All Products</MenuItem>
+                    <Select
+                        value={searchParams.get("filter") || "all_products"}
+                        onChange={(event) => {
+                            let filter = event.target.value;
+                            if (filter) {
+                                setSearchParams({ filter });
+                            } else {
+                                setSearchParams({});
+                            }
+                        }}
+                        className="text-gray filter-input"
+                        sx={{ ml: 1 }}
+                    >
+                        <MenuItem value="all_products">All Products</MenuItem>
                         <MenuItem value="best_value">Best value</MenuItem>
-                        <MenuItem value="Best camera">Best camera</MenuItem>
+                        <MenuItem value="best_camera">Best camera</MenuItem>
                         <MenuItem value="best_performance">Best Performance</MenuItem>
                     </Select>
                 </Box>
             </Box>
-            
+
             {/* product title */}
             <Grid container spacing={3} className="product" sx={{ pb: 2 }}>
                 <Grid item container xs={12} className="product-card">
@@ -54,16 +70,37 @@ const AllProducts: React.FC<any> = () => {
 
             {/* product details */}
             <InfiniteScroll
-                    dataLength={allProducts.length}
-                    next={fetchMoreData}
-                    style={{ overflow: 'hidden' }}
-                    hasMore={ allProducts.length === visible ? true : false }
-                    loader={<Loader /> }
-                >
-                    {
-                        allProducts?.map((item: any) => <ProductList key={item._id} item={item} />)
+                dataLength={allProducts.length}
+                next={fetchMoreData}
+                style={{ overflow: 'hidden' }}
+                hasMore={allProducts.length === visible ? true : false}
+                loader={<Loader />}
+            >
+                {allProducts?.filter((item: any) => {
+                    let filter = searchParams.get("filter");
+                    // if (!filter) return true;
+                    let tags = item.tags;
+                    let title = item.phone_title.toLowerCase();
+                    // console.log(filter);
+                    // console.log(tags)
+                    // return searchValue ? (tags.includes(filter) && title.includes(searchValue.toLowerCase())): tags.includes(filter)
+                    if(searchValue){
+                        if(filter && !filter?.includes("all_products")){
+                            return tags.includes(filter) && title.includes(searchValue.toLowerCase())
+                        }
+                        else{
+                            title.includes(searchValue.toLowerCase());
+                        }
                     }
-                </InfiniteScroll>
+                    else if(!searchValue){
+                        return tags.includes(filter) || filter?.includes("all_products");
+                    }
+                    else{
+                        return true
+                    }
+                }).map((item: any) => <ProductList key={item._id} item={item} />)
+                }
+            </InfiniteScroll>
         </Box>
     );
 };
