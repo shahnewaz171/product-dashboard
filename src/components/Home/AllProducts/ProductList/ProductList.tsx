@@ -10,19 +10,18 @@ interface Props {
 
 const ProductList: React.FC<Props> = ({ item }: Props) => {
     const { brand, phone_title, phone_images,  ram, storage,  phone_price, tags } = item;
-    // console.log(item);
 
     return (
-        <Grid container className="product" sx={{ pt: 3, pb: 4.5 }}>
+        <Grid container className="product align-center" sx={{ pb: 4.5 }}>
             <Grid item xs={5} className="product-card">
-                <Card sx={{ display: 'flex', boxShadow: 'none' }}>
+                <Card className="d-flex align-center" sx={{ boxShadow: 'none' }}>
                     <CardMedia
                         component="img"
                         sx={{ width: '99px', height: '76px' }}
                         image={phone_images[0] || ''}
                         alt="product"
                     />
-                    <Box sx={{ display: 'flex', flexDirection: 'column', pl: 2 }}>
+                    <Box className="d-flex" sx={{ flexDirection: 'column', pl: 2 }}>
                         <Typography component="p" className="fw-600" sx={{ color: '#575757', fontSize: '18px', whiteSpace: 'nowrap' }}>{phone_title || ''} </Typography>
                         <Typography component="p" className="fw-500" sx={{ color: '#74777B', fontSize: '16px', whiteSpace: 'nowrap' }}>{brand || ''}</Typography>
                     </Box>

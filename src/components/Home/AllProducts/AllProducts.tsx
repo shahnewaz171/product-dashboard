@@ -9,7 +9,7 @@ import './AllProducts.css';
 
 const AllProducts: React.FC<any> = () => {
     const { products, searchValue } = useGlobalContext();
-    const [visible, setVisible] = useState<number>(60);
+    const [visible, setVisible] = useState<number>(130);
     let [searchParams, setSearchParams] = useSearchParams();
     const allProducts = products?.slice(0, visible);
 
@@ -18,8 +18,6 @@ const AllProducts: React.FC<any> = () => {
             setVisible(previousItems => previousItems + 20);
         }, 1500);
     };
-
-    console.log(searchValue)
 
     return (
         <Box className="products" sx={{ pt: 5 }}>
@@ -77,28 +75,34 @@ const AllProducts: React.FC<any> = () => {
                 loader={<Loader />}
             >
                 {allProducts?.filter((item: any) => {
-                    let filter = searchParams.get("filter");
-                    // if (!filter) return true;
-                    let tags = item.tags;
-                    let title = item.phone_title.toLowerCase();
-                    // console.log(filter);
-                    // console.log(tags)
-                    // return searchValue ? (tags.includes(filter) && title.includes(searchValue.toLowerCase())): tags.includes(filter)
+                    const filter = searchParams.get("filter");
+                    const tags = item.tags?.includes(filter);
+                    const title = item.phone_title.toLowerCase()?.includes(searchValue.toLowerCase());
+                    const brand = item.brand.toLowerCase()?.includes(searchValue.toLowerCase());
+                    const validAllProduct = filter?.includes("all_products");
+        
                     if(searchValue){
-                        if(filter && !filter?.includes("all_products")){
-                            return tags.includes(filter) && title.includes(searchValue.toLowerCase())
+                        if(validAllProduct){
+                            return validAllProduct && (title || brand);
+                        }
+                        else if(filter && validAllProduct){
+                            return tags && (title || brand) && validAllProduct;
+                        }
+                        else if(filter){
+                            return tags && (title || brand);
                         }
                         else{
-                            title.includes(searchValue.toLowerCase());
+                            return title;
                         }
                     }
-                    else if(!searchValue){
-                        return tags.includes(filter) || filter?.includes("all_products");
+                    else if(!searchValue && filter){
+                        return filter?.includes("all_products") || tags;
                     }
-                    else{
-                        return true
+                    else if(!filter){
+                        return true;
                     }
-                }).map((item: any) => <ProductList key={item._id} item={item} />)
+                    
+                })?.map((item: any) => <ProductList key={item._id} item={item} />)
                 }
             </InfiniteScroll>
         </Box>
