@@ -10,8 +10,45 @@ import './AllProducts.css';
 const AllProducts: React.FC<any> = () => {
     const { products, searchValue } = useGlobalContext();
     const [visible, setVisible] = useState<number>(130);
-    let [searchParams, setSearchParams] = useSearchParams();
+    const [searchParams, setSearchParams] = useSearchParams();
     const allProducts = products?.slice(0, visible);
+    let productsInfo = [];
+
+    if (allProducts) {
+        productsInfo = allProducts?.filter((item: any) => {
+            const filter = searchParams.get("filter");
+            const tags = item.tags?.includes(filter);
+            const title = item.phone_title.toLowerCase()?.includes(searchValue.toLowerCase());
+            const brand = item.brand.toLowerCase()?.includes(searchValue.toLowerCase());
+            const validAllProduct = filter?.includes("all_products");
+
+            if (searchValue) {
+                if (validAllProduct) {
+                    return validAllProduct && (title || brand);
+                }
+                else if (filter && validAllProduct) {
+                    return tags && (title || brand) && validAllProduct;
+                }
+                else if (filter) {
+                    return tags && (title || brand);
+                }
+                else if (!title && !brand) {
+                    return console.log(title)
+                }
+                else {
+                    return (title || brand);
+                }
+            }
+            else if (!searchValue && filter) {
+                return filter?.includes("all_products") || tags;
+            }
+            else if (!filter) {
+                return true;
+            }
+            return true;
+
+        })
+    }
 
     const fetchMoreData = () => {
         setTimeout(() => {
@@ -30,7 +67,7 @@ const AllProducts: React.FC<any> = () => {
                     <Select
                         value={searchParams.get("filter") || "all_products"}
                         onChange={(event) => {
-                            let filter = event.target.value;
+                            const filter = event.target.value;
                             if (filter) {
                                 setSearchParams({ filter });
                             } else {
@@ -74,39 +111,21 @@ const AllProducts: React.FC<any> = () => {
                 hasMore={allProducts.length === visible ? true : false}
                 loader={<Loader />}
             >
-                {allProducts?.filter((item: any) => {
-                    const filter = searchParams.get("filter");
-                    const tags = item.tags?.includes(filter);
-                    const title = item.phone_title.toLowerCase()?.includes(searchValue.toLowerCase());
-                    const brand = item.brand.toLowerCase()?.includes(searchValue.toLowerCase());
-                    const validAllProduct = filter?.includes("all_products");
-        
-                    if(searchValue){
-                        if(validAllProduct){
-                            return validAllProduct && (title || brand);
-                        }
-                        else if(filter && validAllProduct){
-                            return tags && (title || brand) && validAllProduct;
-                        }
-                        else if(filter){
-                            return tags && (title || brand);
-                        }
-                        else{
-                            return title;
-                        }
-                    }
-                    else if(!searchValue && filter){
-                        return filter?.includes("all_products") || tags;
-                    }
-                    else if(!filter){
-                        return true;
-                    }
-                    
-                })?.map((item: any) => <ProductList key={item._id} item={item} />)
+                {productsInfo.length ?
+                    <>
+                        {console.log(productsInfo)}
+                        {
+                            productsInfo?.map((item: any) => <ProductList key={item._id} item={item} />)
+                        }</>
+                    :
+                    allProducts.length !== visible &&
+                    <Typography component="h5" className="text-center not-found" sx={{ mt: 4 }}>
+                        No Product
+                    </Typography>
                 }
             </InfiniteScroll>
         </Box>
     );
 };
 
-export default AllProducts;
+export default (AllProducts);
