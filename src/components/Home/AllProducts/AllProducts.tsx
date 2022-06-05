@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { Box, Dialog, Grid, MenuItem, Select, Typography } from '@mui/material';
+import { Box, Dialog, Grid, MenuItem, Paper, Select, Table, TableBody, TableCell, TableContainer, TableHead, TableRow, Typography } from '@mui/material';
 import useGlobalContext from '../../../context/useGlobalContext';
 import InfiniteScroll from 'react-infinite-scroll-component';
 import ProductList from './ProductList/ProductList';
@@ -7,7 +7,7 @@ import CircleLoader from '../../shared/Loader/CircleLoader';
 import { useSearchParams } from 'react-router-dom';
 import ImageGallery from 'react-image-gallery';
 import './AllProducts.css';
-interface ImageGalleryProp{
+interface ImageGalleryProp {
     original: string;
     thumbnail: string;
 }
@@ -61,7 +61,6 @@ const AllProducts: React.FC = () => {
     };
 
     const handleProduct = (id: any) => {
-        // console.log(id);
         const item = products.find((pd: any) => pd._id === id);
         const images = item?.phone_images?.map((item: any) => {
             const img = {
@@ -70,7 +69,7 @@ const AllProducts: React.FC = () => {
             }
             return img;
         });
-        if(images){
+        if (images) {
             setImages(images);
             setOpenImgGallery(true);
         }
@@ -78,7 +77,7 @@ const AllProducts: React.FC = () => {
 
     return (
         <Box className="products" sx={{ pt: 5 }}>
-            <Box className="d-flex justify-between align-center" sx={{ mb: 5 }}>
+            <Box className="d-flex justify-between align-center flex-wrap" sx={{ mb: 5 }}>
                 <Typography component="p" className="fw-700" sx={{ fontSize: "24px", color: '#575757' }}>
                     All Products
                 </Typography>
@@ -105,45 +104,45 @@ const AllProducts: React.FC = () => {
                 </Box>
             </Box>
 
-            {/* product title */}
-            <Grid container spacing={3} className="product" sx={{ pb: 2 }}>
-                <Grid item container xs={12} className="product-card">
-                    <Grid item xs={5} className="product-card">
-                        <Typography component="p" className="product-title">Model</Typography>
-                    </Grid>
-                    <Grid item xs={2}>
-                        <Typography component="p" className="product-title">Ram/Rom</Typography>
-                    </Grid>
-                    <Grid item xs={3.5}>
-                        <Typography component="p" className="product-title">Tag</Typography>
-                    </Grid>
-                    <Grid item xs={1.5} sx={{ textAlign: 'end' }}>
-                        <Typography component="p" className="product-title">Price</Typography>
-                    </Grid>
-                </Grid>
-            </Grid>
-
             {/* product details */}
-            <InfiniteScroll
-                dataLength={allProducts.length}
-                next={fetchMoreData}
-                style={{ overflow: 'hidden' }}
-                hasMore={allProducts.length === visible ? true : false}
-                loader={<CircleLoader />}
-            >
-                {productsInfo.length ?
-                    productsInfo?.map((item: any) => <ProductList key={item._id} item={item}  handleProduct={handleProduct} />)
-                    :
-                    allProducts.length !== visible &&
-                    <Typography component="h5" className="text-center not-found" sx={{ mt: 4 }}>
-                        No Product
-                    </Typography>
-                }
-            </InfiniteScroll>
+            <TableContainer component={Paper} elevation={0} className="product">
+                <InfiniteScroll
+                    dataLength={allProducts.length}
+                    next={fetchMoreData}
+                    style={{ overflow: 'hidden' }}
+                    hasMore={allProducts.length === visible ? true : false}
+                    loader={<CircleLoader />}
+                >
+                    <Table sx={{ minWidth: 650 }} aria-label="simple table" className="product-card">
+                        <TableHead>
+                            <TableRow  sx={{ '& th': { border: 0 } }}>
+                                <TableCell align="left" className="product-title">Model</TableCell>
+                                <TableCell align="left" className="product-title">Ram/Rom</TableCell>
+                                <TableCell align="left" className="product-title">Tag</TableCell>
+                                <TableCell align="right" className="product-title">Price</TableCell>
+                            </TableRow>
+                        </TableHead>
+                        <TableBody sx={{ mt: 4 }}>
+                            {productsInfo.length ?
+                                productsInfo?.map((item: any) => <ProductList key={item._id} item={item} handleProduct={handleProduct} />)
+                                :
+                                allProducts.length !== visible &&
+                                <TableRow>
+                                    <TableCell colSpan={4} sx={{ textAlign: 'center' }}>
+                                        <Typography component="h5" className="text-center not-found" sx={{ mt: 4 }}>
+                                            No Product
+                                        </Typography>
+                                    </TableCell>
+                                </TableRow>
+                            }
+                        </TableBody>
+                    </Table>
+                </InfiniteScroll>
+            </TableContainer>
 
             {/* Image Gallery */}
             <Dialog onClose={() => setOpenImgGallery(false)} open={openImgGallery}>
-                <ImageGallery items={images} additionalClass=".image" />;
+                <ImageGallery items={images} />
             </Dialog>
         </Box>
     );

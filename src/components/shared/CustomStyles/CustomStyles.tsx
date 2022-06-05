@@ -1,11 +1,12 @@
 import React from "react";
-import { Box, Container, createTheme } from "@mui/material";
+import { Box, Container, createTheme, useMediaQuery } from "@mui/material";
 import { styled, alpha } from '@mui/material/styles';
 import InputBase from '@mui/material/InputBase';
 import Footer from "../Footer/Footer";
 import { ReactNode } from "../../../types/model";
 
 export const Main: React.FC<ReactNode> = ({ children, sx }) => {
+    const matches = useMediaQuery('(max-width: 767px)');
 
     return (
         <React.Fragment>
@@ -13,10 +14,9 @@ export const Main: React.FC<ReactNode> = ({ children, sx }) => {
                 sx={{
                     display: "flex",
                     flexDirection: "column",
-                    paddingTop: '100px',
+                    paddingTop: '50px',
                     paddingBottom: '20px',
-                    paddingLeft: '80px',
-                    paddingRight: "80px",
+                    px: matches ? '20px' : '80px',
                     minHeight: '100vh',
                     position: 'relative',
                     ...sx

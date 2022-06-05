@@ -42,7 +42,7 @@ const Navbar: React.FC = () => {
             open={isMobileMenuOpen}
             onClose={handleMobileMenuClose}
         >
-            <MenuItem>
+            <MenuItem onClick={() => setOpen(true)}>
                 <p>Add Product</p>
             </MenuItem>
         </Menu>
@@ -66,7 +66,7 @@ const Navbar: React.FC = () => {
                             variant="h6"
                             noWrap
                             component="div"
-                            sx={{ flexGrow: 1, fontSize: '28px', fontWeight: 700 }}
+                            sx={{ flexGrow: 1, fontSize: { sm: '22px', md: '28px' }, fontWeight: 700 }}
                             className="text-uppercase"
                         >
                             Logo
@@ -81,6 +81,7 @@ const Navbar: React.FC = () => {
                                     inputProps={{ 'aria-label': 'search' }}
                                     defaultValue=""
                                     onChange={(e) => setSearchValue(e.target.value)}
+                                    className="search-input"
                                 />
                             </Search>
                             <Button onClick={() => setOpen(true)} sx={{ display: { xs: 'none', md: 'block' } }} variant="contained" className='text-none addProduct-btn'>
@@ -95,6 +96,7 @@ const Navbar: React.FC = () => {
                                 aria-haspopup="true"
                                 onClick={handleMobileMenuOpen}
                                 color="inherit"
+                                sx={{ p: '0px 0px 0px 12px' }}
                             >
                                 <MoreIcon />
                             </IconButton>
