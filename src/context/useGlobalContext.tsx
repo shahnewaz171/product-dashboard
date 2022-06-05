@@ -112,7 +112,7 @@ export const UserProvider: React.FC<ReactNode> = ({ children }) => {
             toast.success(value, {
                 theme: "light",
                 position: toast.POSITION.TOP_CENTER,
-                autoClose: 5000
+                autoClose: 2000
             });
         }
         else {

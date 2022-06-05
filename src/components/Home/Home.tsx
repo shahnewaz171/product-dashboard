@@ -6,6 +6,7 @@ import SourcesChart from './SourcesChart/SourcesChart';
 import ConditionsChart from './ConditionsChart/ConditionsChart';
 import AllProducts from './AllProducts/AllProducts';
 import useGlobalContext from '../../context/useGlobalContext';
+import { ToastContainer } from 'react-toastify';
 import './Home.css';
 
 
@@ -56,7 +57,7 @@ const Home: React.FC<any> = () => {
 
             {/* All Products */}
             <AllProducts />
-
+            <ToastContainer />
         </Main>
     );
 };

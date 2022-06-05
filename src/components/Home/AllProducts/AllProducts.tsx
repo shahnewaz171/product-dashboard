@@ -17,7 +17,7 @@ const AllProducts: React.FC = () => {
     if (allProducts) {
         productsInfo = allProducts?.filter((item: any) => {
             const filter = searchParams.get("filter");
-            const tags = item.tags?.includes(filter);
+            const tags = item.tags?.includes(filter) || item.customTags?.includes(filter);
             const title = item.phone_title.toLowerCase()?.includes(searchValue.toLowerCase());
             const brand = item.brand.toLowerCase()?.includes(searchValue.toLowerCase());
             const validAllProduct = filter?.includes("all_products");
