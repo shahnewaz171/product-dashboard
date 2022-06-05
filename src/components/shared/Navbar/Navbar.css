@@ -12,16 +12,37 @@
     background-color: #F7F5F2 !important;
     box-shadow: none !important;
 }
-.MuiFab-root{
+
+.MuiFab-root {
     background-color: #0095A0 !important;
 }
 
+.scroll-to-top {
+    transition: all .3s;
+}
+
+.scroll-to-top .icon {
+    font-size: 22px;
+    animation: scrollTop 0.5s alternate ease infinite;
+}
+
+@keyframes scrollTop {
+    from {
+        transform: translateY(2px);
+    }
+
+    to {
+        transform: translateY(-1px);
+    }
+}
+
 /* responsive */
-@media only screen and (max-width: 767px){
+@media only screen and (max-width: 767px) {
     .navbar .MuiToolbar-root {
         padding: 0px 20px;
     }
-    .search-input .MuiInputBase-input{
+
+    .search-input .MuiInputBase-input {
         padding: 6px 15px !important;
     }
 }

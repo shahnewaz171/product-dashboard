@@ -57,7 +57,7 @@ const AllProducts: React.FC = () => {
     const fetchMoreData = () => {
         setTimeout(() => {
             setVisible(previousItems => previousItems + 20);
-        }, 1000);
+        }, 500);
     };
 
     const handleProduct = (id: any) => {

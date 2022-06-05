@@ -120,8 +120,8 @@ const Navbar: React.FC = () => {
                     arrow
                     placement="left"
                 >
-                    <Fab color="secondary" size="small">
-                        <NavigationIcon />
+                    <Fab color="secondary" size="small" className="scroll-to-top">
+                        <NavigationIcon  className="icon" />
                     </Fab>
                 </Tooltip>
             </Zoom>
