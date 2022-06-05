@@ -1,17 +1,19 @@
 
 import React, { useState } from 'react';
-import { AppBar, Box, Toolbar, Typography, Button, Menu, IconButton, MenuItem } from '@mui/material';
+import { AppBar, Box, Toolbar, Typography, Button, Menu, IconButton, MenuItem, Tooltip, useScrollTrigger, Zoom, Fab } from '@mui/material';
 import SearchIcon from '@mui/icons-material/Search';
 import MoreIcon from '@mui/icons-material/MoreVert';
 import { Search, SearchIconWrapper, StyledInputBase } from '../CustomStyles/CustomStyles';
 import useGlobalContext from '../../../context/useGlobalContext';
 import AddProduct from '../../Home/AllProducts/AddProduct/AddProduct';
+import NavigationIcon from "@mui/icons-material/Navigation";
 import './Navbar.css';
 
 const Navbar: React.FC = () => {
     const { setSearchValue } = useGlobalContext();
     const [mobileMoreAnchorEl, setMobileMoreAnchorEl] = useState<null | HTMLElement>(null);
     const [open, setOpen] = useState<boolean>(false);
+    const trigger = useScrollTrigger();
 
     const isMobileMenuOpen = Boolean(mobileMoreAnchorEl);
 
@@ -45,6 +47,15 @@ const Navbar: React.FC = () => {
             </MenuItem>
         </Menu>
     );
+
+    const handleClick = (event: React.MouseEvent<HTMLDivElement>) => {
+        const anchor = ((event.target as HTMLDivElement).ownerDocument || document).querySelector(
+            "#back-to-top-anchor");
+
+        if (anchor) {
+            anchor.scrollIntoView({ behavior: "smooth", block: "center" });
+        }
+    };
 
     return (
         <React.Fragment>
@@ -95,6 +106,23 @@ const Navbar: React.FC = () => {
             {
                 <AddProduct open={open} setOpen={setOpen} />
             }
+
+            {/* Scroll to top */}
+            <Toolbar id="back-to-top-anchor" />
+            <Zoom in={trigger}>
+                <Tooltip
+                    onClick={handleClick}
+                    role="presentation"
+                    sx={{ position: "fixed", bottom: 16, right: 16 }}
+                    title="Scroll to Top"
+                    arrow
+                    placement="left"
+                >
+                    <Fab color="secondary" size="small">
+                        <NavigationIcon />
+                    </Fab>
+                </Tooltip>
+            </Zoom>
         </React.Fragment>
     );
 };
