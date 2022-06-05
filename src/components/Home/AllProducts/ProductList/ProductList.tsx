@@ -28,14 +28,21 @@ const ProductList: React.FC<Props> = ({ item }: Props) => {
                 </Card>
             </Grid>
             <Grid item xs={2}>
-                <Typography component="p" sx={{ color: '#74777B', fontSize: '16px', whiteSpace: 'nowrap', fontWeight: 500 }}>{`${ram || 0}/${storage || 0}`}</Typography>
+                <Typography component="p" sx={{ color: '#74777B', fontSize: '16px', whiteSpace: 'nowrap', fontWeight: 500 }}>{ (item?.ram_rom) || (`${ram || 0}/${storage || 0}`)}</Typography>
             </Grid>
             <Grid item xs={3.5}>
-                {tags?.map((tag: string, i: number) => {
+                {item.customTags ? [...tags, ...item.customTags]?.map((tag: string, i: number) => {
                     return (
                         <Chip key={i + 1} label={tag?.split('_').join(' ')} className={"tag-item "+ (tag.includes('best_value') ? 'bestValue' : tag.includes('best_camera') ? 'bestCamera' : tag.includes('best_performance') ? 'bestPerformance' : '')}/>
                     )
-                })}
+                })
+                :
+                tags?.map((tag: string, i: number) => {
+                    return (
+                        <Chip key={i + 1} label={tag?.split('_').join(' ')} className={"tag-item "+ (tag.includes('best_value') ? 'bestValue' : tag.includes('best_camera') ? 'bestCamera' : tag.includes('best_performance') ? 'bestPerformance' : '')}/>
+                    )
+                }) 
+            }
             </Grid>
             <Grid item xs={1.5} sx={{ textAlign: 'end' }}>
                 <Typography component="p" sx={{ color: '#74777B', fontSize: '16px', whiteSpace: 'nowrap', fontWeight: 500 }}>TK {phone_price?.toString().replace(/\B(?<!\.\d*)(?=(\d{3})+(?!\d))/g, ",")}</Typography>

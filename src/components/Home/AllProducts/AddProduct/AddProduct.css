@@ -1,5 +1,5 @@
 .add-product .MuiOutlinedInput-input {
-    padding: 10px 125px 10px 15px;
+    padding: 10px 15px;
 }
 
 .add-product .MuiAutocomplete-root .MuiOutlinedInput-root {
@@ -68,6 +68,9 @@
     width: 15px !important;
     margin-right: 5px;
 }
+.disable-color{
+    color: #fff !important;
+}
 
 .add-product .MuiFormHelperText-root {
     margin-left: 0px;
@@ -76,4 +79,14 @@
 .add-product .addPd-btn {
     padding: 9.5px 30px;
     box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.05);
+}
+
+/* hide arrow icons */
+input::-webkit-outer-spin-button,
+input::-webkit-inner-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}
+input[type=number] {
+  -moz-appearance: textfield;
 }

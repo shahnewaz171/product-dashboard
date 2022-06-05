@@ -14,8 +14,8 @@ export const UserProvider: React.FC<ReactNode> = ({ children }) => {
     const [searchValue, setSearchValue] = useState<string>("");
     const toastId = useRef<any>(null);
 
-    const getProducts = () => {
-        const productLength = productList.length;
+    const getProducts = (data: productProps[]) => {
+        const productLength = data.length;
         let totalBikroy = 0;
         let totalDaraz = 0;
         let totalPickaboo = 0;
@@ -27,17 +27,17 @@ export const UserProvider: React.FC<ReactNode> = ({ children }) => {
         if (productLength) {
             setIsLoading(false);
 
-            const data = productList.map((item, index) => {
+            const filteredProducts = data?.map((item, index) => {
                 const { phone_price, official_warranty, unofficial_warranty, no_warranty, used_phone, phone_link, ram, storage, brand, phone_details } = item;
 
                 item.tags = [];
 
-                const mainSensor = parseInt(phone_details.mainCamera?.split(',')[0]);
-                const cameras = phone_details.mainCamera?.split(/[ ,]+/)?.filter(item => (item === 'MP'));
-                const selfieCamera = parseInt(phone_details.selfieCamera?.split(',')[0]);
-                const snapdragonChip = phone_details['chipset'].toLowerCase()?.includes('snapdragon');
-                const amoledDisplay = phone_details['displayType'].toLowerCase()?.includes('amoled');
-                const specificPixels = phone_details['displayRes'].toLowerCase()?.includes('1080');
+                const mainSensor = parseInt(phone_details?.mainCamera?.split(',')[0]);
+                const cameras = phone_details?.mainCamera?.split(/[ ,]+/)?.filter(item => (item === 'MP'));
+                const selfieCamera = parseInt(phone_details?.selfieCamera?.split(',')[0]);
+                const snapdragonChip = phone_details?.chipset?.toLowerCase().includes('snapdragon');
+                const amoledDisplay = phone_details?.displayType?.toLowerCase().includes('amoled');
+                const specificPixels = phone_details?.displayRes?.toLowerCase().includes('1080');
 
                 /* best value */
                 if((phone_price <= 20000) && ((Number(ram)) >= 4) && ((Number(storage)) >= 64) && ((brand.toLowerCase().includes('xiaomi')) || (brand.toLowerCase().includes('realme')))){
@@ -80,7 +80,7 @@ export const UserProvider: React.FC<ReactNode> = ({ children }) => {
                 return item;
 
             });
-            setProducts(data);
+            setProducts(filteredProducts);
 
             const sourcesLength = totalBikroy + totalDaraz + totalPickaboo;
 
@@ -103,7 +103,7 @@ export const UserProvider: React.FC<ReactNode> = ({ children }) => {
     }
 
     useEffect(() => {
-        getProducts();
+        getProducts(productList);
     }, []);
 
     const alertMessage = (value: string, isSuccess: boolean) => {

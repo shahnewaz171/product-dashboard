@@ -3,7 +3,7 @@ import { Box, Grid, MenuItem, Select, Typography } from '@mui/material';
 import useGlobalContext from '../../../context/useGlobalContext';
 import InfiniteScroll from 'react-infinite-scroll-component';
 import ProductList from './ProductList/ProductList';
-import Loader from '../../shared/Loader/RotatingLoader';
+import CircleLoader from '../../shared/Loader/CircleLoader';
 import { useSearchParams } from 'react-router-dom';
 import './AllProducts.css';
 
@@ -32,9 +32,6 @@ const AllProducts: React.FC = () => {
                 else if (filter) {
                     return tags && (title || brand);
                 }
-                else if (!title && !brand) {
-                    return console.log(title)
-                }
                 else {
                     return (title || brand);
                 }
@@ -53,7 +50,7 @@ const AllProducts: React.FC = () => {
     const fetchMoreData = () => {
         setTimeout(() => {
             setVisible(previousItems => previousItems + 20);
-        }, 500);
+        }, 1000);
     };
 
     return (
@@ -109,10 +106,10 @@ const AllProducts: React.FC = () => {
                 next={fetchMoreData}
                 style={{ overflow: 'hidden' }}
                 hasMore={allProducts.length === visible ? true : false}
-                loader={<Loader />}
+                loader={<CircleLoader />}
             >
                 {productsInfo.length ?
-                    productsInfo?.map((item: any) => <ProductList key={item._id} item={item} />)
+                    productsInfo?.map((item: any, index: any) => <ProductList key={index} item={item} />)
                     :
                     allProducts.length !== visible &&
                     <Typography component="h5" className="text-center not-found" sx={{ mt: 4 }}>

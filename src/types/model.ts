@@ -83,4 +83,20 @@ export interface productProps {
     seller_contact: string;
     __v: number;
     tags?: string[];
+    customTags?: string[];
+}
+
+export interface ProductInput{
+    id: number;
+    title: string;
+    name: string;
+    placeText: string;
+}
+
+export interface ProductForm{
+    phone_title?: string;
+    brand?: string;
+    ram_rom?: string;
+    tags?: string;
+    phone_price?: string;
 }

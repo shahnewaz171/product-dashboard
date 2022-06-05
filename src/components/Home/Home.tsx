@@ -10,7 +10,7 @@ import './Home.css';
 
 
 const Home: React.FC<any> = () => {
-    const { products, percentage } = useGlobalContext();
+    const { percentage } = useGlobalContext();
 
     return (
         <Main>

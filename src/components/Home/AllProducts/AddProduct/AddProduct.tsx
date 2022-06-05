@@ -4,25 +4,31 @@ import { useForm } from 'react-hook-form';
 import { IoCloseSharp } from 'react-icons/io5';
 import useGlobalContext from '../../../../context/useGlobalContext';
 import { modalStyle } from '../../../shared/CustomStyles/CustomStyles';
+import { ProductInput } from '../../../../types/model';
 import { AiOutlineCloseCircle } from "react-icons/ai";
 import { FiCheckCircle } from "react-icons/fi";
 import './AddProduct.css';
+interface Props {
+    open: boolean;
+    setOpen: React.Dispatch<React.SetStateAction<boolean>>;
+}
 
-const productInfo = [
-    { id: 1, title: "Product name", name: "pd_name", placeText: "Enter your product name" },
+const productInputs: ProductInput[] = [
+    { id: 1, title: "Product name", name: "phone_title", placeText: "Enter your product name" },
     { id: 2, title: "Brand", name: "brand", placeText: "Enter brand name..." },
     { id: 3, title: "Ram/Rom", name: "ram_rom", placeText: "Zip code" },
     { id: 4, title: "Tags", name: "tags", placeText: "Search and Select" },
-    { id: 5, title: "Price", name: "price", placeText: "Enter your product price" }
+    { id: 5, title: "Price", name: "phone_price", placeText: "Enter your product price" },
+    { id: 6, title: "Image url", name: "phone_image", placeText: "Enter a image url" }
 ]
-const tagLabel = ['Best value', 'Best camera', 'Best performance'];
+const tagLabel: string[] = ['Best Value', 'Best Camera', 'Best Performance'];
 
 
-const AddProduct: React.FC< any> = ({ open, setOpen }) => {
-    const { ErrorMessages } = useGlobalContext();
+const AddProduct: React.FC<Props> = ({ open, setOpen }) => {
+    const { ErrorMessages, products, getProducts } = useGlobalContext();
     const [disable, setDisable] = useState<boolean>(false);
     const [selectedTags, setSelectedTags] = useState<string[]>([]);
-    const { register, handleSubmit, reset, formState: { errors }, control } = useForm({
+    const { register, handleSubmit, reset, formState: { errors } } = useForm<any>({
         mode: "all",
         reValidateMode: 'onChange'
     });
@@ -38,7 +44,18 @@ const AddProduct: React.FC< any> = ({ open, setOpen }) => {
     }
 
     const onSubmit = (data: any) => {
-        console.log(data);
+        setDisable(true);
+        const tags =  selectedTags?.map(v => v.split(' ').join('_').toLowerCase());
+        const newItem = { ...data, customTags: tags, phone_images: [data.phone_image] };
+        const payload = [newItem, ...products]; 
+
+        setTimeout(() => {
+            setDisable(false);
+            getProducts(payload);
+            reset();
+            setSelectedTags([]);
+            setOpen(false);
+        }, 1000);
     }
 
     return (
@@ -61,7 +78,7 @@ const AddProduct: React.FC< any> = ({ open, setOpen }) => {
                 </Box>
                 <Box className="addProduct-body">
                     <Grid container columnSpacing={3} >
-                        {productInfo?.map(item => {
+                        {productInputs?.map(item => {
                             const { id, name, title, placeText } = item;
                             return (
                                 name === "tags" ?
@@ -79,18 +96,29 @@ const AddProduct: React.FC< any> = ({ open, setOpen }) => {
                                             // filterSelectedOptions
                                             onChange={(event, value) => handleSelectedTags(value)}
                                             renderInput={(params) => (
-                                                <TextField {...params} placeholder={placeText} {...register(`${name}`, { required: selectedTags.length ? '' : 'This field is required' })} />
+                                                <TextField {...params} placeholder={placeText} {...register(`${name}`, { required: selectedTags.length ? '' : 'This field is required' })} sx={{
+                                                    '& ::placeholder': {
+                                                        fontSize: '12px',
+                                                        color: '#000'
+                                                    }
+                                                }} />
                                             )}
                                         />
-                                        <ErrorMessages errors={errors} inputName={`${name}`}  />
+                                        <ErrorMessages errors={errors} inputName={`${name}`} />
                                     </Grid>
                                     :
-                                    <Grid key={id} item xs={ name === ("pd_name" || "price") ? 12 : 6 } sx={{ mb: 3, pt: name === "pd_name" ? 3 : 0 }}>
+                                    <Grid key={id} item xs={(name.includes('brand') || (name.includes('ram_rom'))) ? 6 : 12} sx={{ mb: 3, pt: name.includes('phone_title') ? 3 : 0 }}>
                                         <Typography component="p" className="searchItem-title" >
                                             {title}:
                                         </Typography>
-                                        <TextField fullWidth {...register(`${name}`, { required: 'This field is required' })} placeholder={placeText} />
-                                        <ErrorMessages errors={errors} inputName={`${name}`}  />
+                                        <TextField fullWidth type={name.includes('phone_price') ? "number" : name.includes('phone_image') ? 'url' : "text"} {...register(`${name}`, { required: 'This field is required' })} 
+                                            placeholder={placeText} sx={{
+                                                '& ::placeholder': {
+                                                    fontSize: '12px',
+                                                    color: '#000'
+                                                }
+                                            }} />
+                                        <ErrorMessages errors={errors} inputName={`${name}`} />
                                     </Grid>
                             )
                         })}

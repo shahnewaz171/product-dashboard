@@ -6,7 +6,7 @@ const RotatingLoader: React.FC = () => {
 
     return (
         <div style={loaderStyle}>
-            <RotatingLines width={'80'} strokeColor="#0095A0" strokeWidth="2" />
+            <RotatingLines width={'75'} strokeColor="#0095A0" strokeWidth="2" />
         </div>
     );
 };
