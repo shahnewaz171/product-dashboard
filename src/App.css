@@ -48,7 +48,6 @@ body {
 
 
 /* product */
-
 .MuiOutlinedInput-root .MuiOutlinedInput-notchedOutline {
     border-width: 0.5px !important;
     border-color: #B7B8BC !important;
@@ -56,4 +55,17 @@ body {
 
 .MuiOutlinedInput-root.Mui-focused .MuiOutlinedInput-notchedOutline {
     border-color: #0095A0 !important;
+}
+
+/* scrollbar */
+::-webkit-scrollbar{
+    width: 10px;
+}
+::-webkit-scrollbar-thumb{
+    background:#0095A0;
+    border-radius: 6px;
+    transition:  all .4s ease;
+}
+::-webkit-scrollbar-thumb:hover{
+    background: #0095A0;
 }

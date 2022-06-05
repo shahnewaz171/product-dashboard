@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { Box, Dialog, Grid, MenuItem, Paper, Select, Table, TableBody, TableCell, TableContainer, TableHead, TableRow, Typography } from '@mui/material';
+import { Box, Dialog, MenuItem, Paper, Select, Table, TableBody, TableCell, TableContainer, TableHead, TableRow, Typography } from '@mui/material';
 import useGlobalContext from '../../../context/useGlobalContext';
 import InfiniteScroll from 'react-infinite-scroll-component';
 import ProductList from './ProductList/ProductList';

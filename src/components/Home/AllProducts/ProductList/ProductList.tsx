@@ -1,5 +1,5 @@
 import React from 'react';
-import { Box, Card, CardMedia, Chip, Grid, TableCell, TableRow, Typography } from '@mui/material';
+import { Box, Card, CardMedia, Chip, TableCell, TableRow, Typography } from '@mui/material';
 import { productProps } from '../../../../types/model';
 
 interface Props {
