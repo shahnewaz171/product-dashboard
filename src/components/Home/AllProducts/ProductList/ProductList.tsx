@@ -6,18 +6,20 @@ interface Props {
     products?: productProps[];
     item: any;
     key: string;
+    handleProduct: any;
 }
 
-const ProductList: React.FC<Props> = ({ item }: Props) => {
-    const { brand, phone_title, phone_images,  ram, storage,  phone_price, tags } = item;
+const ProductList: React.FC<Props> = ({ item, handleProduct }: Props) => {
+    const { _id, brand, phone_title, phone_images,  ram, storage,  phone_price, tags } = item;
 
     return (
-        <Grid container className="product align-center" sx={{ pb: 4.5 }}>
+        <Grid container className="product align-center" sx={{ pb: 5 }}>
             <Grid item xs={5} className="product-card">
                 <Card className="d-flex align-center" sx={{ boxShadow: 'none' }}>
                     <CardMedia
+                        onClick={() => handleProduct(_id)}
                         component="img"
-                        sx={{ width: '99px', height: '76px' }}
+                        className="cardMedia"
                         image={phone_images[0] || ''}
                         alt="product"
                     />

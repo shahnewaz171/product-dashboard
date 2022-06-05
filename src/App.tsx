@@ -2,6 +2,7 @@ import React from 'react';
 import { Outlet, useRoutes } from 'react-router-dom';
 import { UserProvider } from './context/useGlobalContext';
 import 'react-toastify/dist/ReactToastify.css';
+import "react-image-gallery/styles/css/image-gallery.css";
 import Navbar from './components/shared/Navbar/Navbar';
 import NotFound from './components/shared/NotFound/NotFound';
 import { ThemeProvider } from '@mui/material';

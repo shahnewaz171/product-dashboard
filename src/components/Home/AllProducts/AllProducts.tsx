@@ -1,16 +1,23 @@
 import React, { useState } from 'react';
-import { Box, Grid, MenuItem, Select, Typography } from '@mui/material';
+import { Box, Dialog, Grid, MenuItem, Select, Typography } from '@mui/material';
 import useGlobalContext from '../../../context/useGlobalContext';
 import InfiniteScroll from 'react-infinite-scroll-component';
 import ProductList from './ProductList/ProductList';
 import CircleLoader from '../../shared/Loader/CircleLoader';
 import { useSearchParams } from 'react-router-dom';
+import ImageGallery from 'react-image-gallery';
 import './AllProducts.css';
+interface ImageGalleryProp{
+    original: string;
+    thumbnail: string;
+}
 
 const AllProducts: React.FC = () => {
     const { products, searchValue } = useGlobalContext();
     const [visible, setVisible] = useState<number>(20);
     const [searchParams, setSearchParams] = useSearchParams();
+    const [openImgGallery, setOpenImgGallery] = useState<boolean>(false);
+    const [images, setImages] = useState<ImageGalleryProp[]>([]);
     const allProducts = products?.slice(0, visible);
     let productsInfo = [];
 
@@ -52,6 +59,22 @@ const AllProducts: React.FC = () => {
             setVisible(previousItems => previousItems + 20);
         }, 1000);
     };
+
+    const handleProduct = (id: any) => {
+        // console.log(id);
+        const item = products.find((pd: any) => pd._id === id);
+        const images = item?.phone_images?.map((item: any) => {
+            const img = {
+                original: item,
+                thumbnail: item
+            }
+            return img;
+        });
+        if(images){
+            setImages(images);
+            setOpenImgGallery(true);
+        }
+    }
 
     return (
         <Box className="products" sx={{ pt: 5 }}>
@@ -109,7 +132,7 @@ const AllProducts: React.FC = () => {
                 loader={<CircleLoader />}
             >
                 {productsInfo.length ?
-                    productsInfo?.map((item: any, index: any) => <ProductList key={index} item={item} />)
+                    productsInfo?.map((item: any) => <ProductList key={item._id} item={item}  handleProduct={handleProduct} />)
                     :
                     allProducts.length !== visible &&
                     <Typography component="h5" className="text-center not-found" sx={{ mt: 4 }}>
@@ -117,6 +140,11 @@ const AllProducts: React.FC = () => {
                     </Typography>
                 }
             </InfiniteScroll>
+
+            {/* Image Gallery */}
+            <Dialog onClose={() => setOpenImgGallery(false)} open={openImgGallery}>
+                <ImageGallery items={images} additionalClass=".image" />;
+            </Dialog>
         </Box>
     );
 };

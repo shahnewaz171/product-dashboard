@@ -64,6 +64,8 @@
         ]
     },
     "devDependencies": {
-        "file-loader": "^6.2.0"
+        "@types/react-image-gallery": "^1.0.5",
+        "file-loader": "^6.2.0",
+        "react-image-gallery": "^1.2.8"
     }
 }

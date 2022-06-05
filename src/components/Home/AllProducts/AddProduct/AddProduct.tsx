@@ -19,7 +19,7 @@ const productInputs: ProductInput[] = [
     { id: 3, title: "Ram/Rom", name: "ram_rom", placeText: "Zip code" },
     { id: 4, title: "Tags", name: "tags", placeText: "Search and Select" },
     { id: 5, title: "Price", name: "phone_price", placeText: "Enter your product price" },
-    { id: 6, title: "Image url", name: "phone_image", placeText: "Enter a image url" }
+    { id: 6, title: "Image url", name: "phone_images", placeText: "Enter a image url" }
 ]
 const tagLabel: string[] = ['Best Value', 'Best Camera', 'Best Performance'];
 
@@ -46,7 +46,7 @@ const AddProduct: React.FC<Props> = ({ open, setOpen }) => {
     const onSubmit = (data: any) => {
         setDisable(true);
         const tags =  selectedTags?.map(v => v.split(' ').join('_').toLowerCase());
-        const newItem = { ...data, customTags: tags, phone_images: [data.phone_image] };
+        const newItem = { ...data, _id: Date.now(), customTags: tags, phone_images: [data.phone_images] };
         const payload = [newItem, ...products]; 
 
         setTimeout(() => {
@@ -112,7 +112,7 @@ const AddProduct: React.FC<Props> = ({ open, setOpen }) => {
                                         <Typography component="p" className="searchItem-title" >
                                             {title}:
                                         </Typography>
-                                        <TextField fullWidth type={name.includes('phone_price') ? "number" : name.includes('phone_image') ? 'url' : "text"} {...register(`${name}`, { required: 'This field is required' })} 
+                                        <TextField fullWidth type={name.includes('phone_price') ? "number" : name.includes('phone_images') ? 'url' : "text"} {...register(`${name}`, { required: 'This field is required' })} 
                                             placeholder={placeText} sx={{
                                                 '& ::placeholder': {
                                                     fontSize: '12px',
