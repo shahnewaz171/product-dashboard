@@ -109,7 +109,7 @@ const AllProducts: React.FC = () => {
                 <InfiniteScroll
                     dataLength={allProducts.length}
                     next={fetchMoreData}
-                    style={{ overflow: 'hidden' }}
+                    style={{ overflowY: 'hidden' }}
                     hasMore={allProducts.length === visible ? true : false}
                     loader={<CircleLoader />}
                 >

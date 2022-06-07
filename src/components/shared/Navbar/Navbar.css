@@ -30,19 +30,34 @@
     from {
         transform: translateY(2px);
     }
-
     to {
         transform: translateY(-1px);
     }
 }
 
+
 /* responsive */
+
 @media only screen and (max-width: 767px) {
     .navbar .MuiToolbar-root {
         padding: 0px 20px;
     }
-
     .search-input .MuiInputBase-input {
         padding: 6px 15px !important;
+    }
+}
+
+@media only screen and (max-width: 400px) {
+    .navbar .w-54 {
+        width: 54%;
+    }
+    .navbar .search-input ::placeholder {
+        font-size: 10px !important;
+    }
+    .navbar .search-icon {
+        padding: 0px 8px !important;
+    }
+    .navbar .search-icon .MuiSvgIcon-root {
+        font-size: 16px !important;
     }
 }

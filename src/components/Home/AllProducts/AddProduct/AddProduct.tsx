@@ -15,8 +15,8 @@ interface Props {
 
 const productInputs: ProductInput[] = [
     { id: 1, title: "Product name", name: "phone_title", placeText: "Enter your product name" },
-    { id: 2, title: "Brand", name: "brand", placeText: "Enter brand name..." },
-    { id: 3, title: "Ram/Rom", name: "ram_rom", placeText: "Zip code" },
+    { id: 2, title: "Brand", name: "brand", placeText: "Enter brand name" },
+    { id: 3, title: "Ram/Rom", name: "ram_rom", placeText: "Enter ram and rom" },
     { id: 4, title: "Tags", name: "tags", placeText: "Search and Select" },
     { id: 5, title: "Price", name: "phone_price", placeText: "Enter your product price" },
     { id: 6, title: "Image url", name: "phone_images", placeText: "Enter a image url" }
@@ -124,7 +124,7 @@ const AddProduct: React.FC<Props> = ({ open, setOpen }) => {
                             )
                         })}
                     </Grid>
-                    <Box sx={{ py: 4, textAlign: 'end' }}>
+                    <Box sx={{ py: 4, display: 'flex', justifyContent: { sm: 'start', md: 'end' } }}>
                         <Button onClick={handleClose} value="submit_close" variant="contained" className="text-none addPd-btn" sx={{ backgroundColor: "#B7B8BC !important" }}>
                             <AiOutlineCloseCircle style={{ fontSize: '17px' }} />
                             <Typography component="span" sx={{ pl: .8 }}>Cancel</Typography>

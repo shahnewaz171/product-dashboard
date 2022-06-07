@@ -43,7 +43,7 @@ const Navbar: React.FC = () => {
             onClose={handleMobileMenuClose}
         >
             <MenuItem onClick={() => setOpen(true)}>
-                <p>Add Product</p>
+                Add Product
             </MenuItem>
         </Menu>
     );
@@ -71,10 +71,10 @@ const Navbar: React.FC = () => {
                         >
                             Logo
                         </Typography>
-                        <Box sx={{ display: { md: 'flex' } }}>
+                        <Box sx={{ display: { md: 'flex' } }} className="w-54">
                             <Search>
-                                <SearchIconWrapper>
-                                    <SearchIcon />
+                                <SearchIconWrapper className='search-icon'>
+                                    <SearchIcon sx={{ fontSize: '20px' }} />
                                 </SearchIconWrapper>
                                 <StyledInputBase
                                     placeholder="Search by Title or Brand"
@@ -82,6 +82,7 @@ const Navbar: React.FC = () => {
                                     defaultValue=""
                                     onChange={(e) => setSearchValue(e.target.value)}
                                     className="search-input"
+                                   
                                 />
                             </Search>
                             <Button onClick={() => setOpen(true)} sx={{ display: { xs: 'none', md: 'block' } }} variant="contained" className='text-none addProduct-btn'>

@@ -2,9 +2,10 @@
     color: #74777B;
     font-size: 16px;
     white-space: nowrap;
-    padding: 0px 0px 40px 0px !important; 
+    padding: 0px 0px 40px 0px !important;
 }
-.product tbody tr td{
+
+.product tbody tr td {
     padding-bottom: 35px !important;
 }
 
@@ -41,7 +42,8 @@
     color: #cb6c6c;
     font-size: 12px;
 }
-.cardMedia{
+
+.cardMedia {
     width: 104px !important;
     height: 104px;
     object-fit: cover !important;
@@ -55,4 +57,18 @@
 
 .image-gallery-image {
     min-height: 320px;
+}
+
+.product ::-webkit-scrollbar {
+    height: 10px !important;
+}
+
+.product ::-webkit-scrollbar-thumb {
+    background: #0095A0;
+    border-radius: 6px;
+    transition: all .4s ease;
+}
+
+.product ::-webkit-scrollbar-thumb:hover {
+    background: #0095A0;
 }
