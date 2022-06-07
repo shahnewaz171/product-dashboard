@@ -22,6 +22,7 @@ const App: React.FC = () => {
       element: <Outlet />,
       children: [
         { index: true, element: <Home /> },
+        { path: 'home', element: <Home /> },
       ],
     },
     { path: "*", element: <NotFound /> },

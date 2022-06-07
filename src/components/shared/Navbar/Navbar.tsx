@@ -7,10 +7,12 @@ import { Search, SearchIconWrapper, StyledInputBase } from '../CustomStyles/Cust
 import useGlobalContext from '../../../context/useGlobalContext';
 import AddProduct from '../../Home/AllProducts/AddProduct/AddProduct';
 import NavigationIcon from "@mui/icons-material/Navigation";
+import { useNavigate } from 'react-router-dom';
 import './Navbar.css';
 
 const Navbar: React.FC = () => {
-    const { setSearchValue } = useGlobalContext();
+    const { searchValue, setSearchValue } = useGlobalContext();
+    const navigate = useNavigate();
     const [mobileMoreAnchorEl, setMobileMoreAnchorEl] = useState<null | HTMLElement>(null);
     const [open, setOpen] = useState<boolean>(false);
     const trigger = useScrollTrigger();
@@ -57,6 +59,12 @@ const Navbar: React.FC = () => {
         }
     };
 
+    const goTohome = () => {
+        setSearchValue("");
+        console.log('aaaaa')
+        navigate('/');
+    }
+
     return (
         <React.Fragment>
             <Box sx={{ flexGrow: 1 }}>
@@ -66,8 +74,9 @@ const Navbar: React.FC = () => {
                             variant="h6"
                             noWrap
                             component="div"
-                            sx={{ flexGrow: 1, fontSize: { sm: '22px', md: '28px' }, fontWeight: 700 }}
+                            sx={{ flexGrow: 1, fontSize: { sm: '22px', md: '28px' }, fontWeight: 700, cursor: 'pointer' }}
                             className="text-uppercase"
+                            onClick={goTohome}
                         >
                             Logo
                         </Typography>
@@ -79,7 +88,7 @@ const Navbar: React.FC = () => {
                                 <StyledInputBase
                                     placeholder="Search by Title or Brand"
                                     inputProps={{ 'aria-label': 'search' }}
-                                    defaultValue=""
+                                    value={searchValue}
                                     onChange={(e) => setSearchValue(e.target.value)}
                                     className="search-input"
                                    
